@@ -74,7 +74,10 @@ public class PlayerController : MonoBehaviour
             moveSpeed = 5;
         }
 
-        rb.AddForce(transform.forward * moveVector.z * moveSpeed, ForceMode.Acceleration);
+        if(moveVector != Vector3.zero){
+            rb.AddForce(transform.forward * moveVector.z * moveSpeed, ForceMode.Acceleration);
+        }
+        
         //Debug.Log(moveVector);
 
     }
