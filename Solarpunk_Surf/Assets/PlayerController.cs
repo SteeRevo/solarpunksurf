@@ -12,9 +12,6 @@ public class PlayerController : MonoBehaviour
     private float acceleration = 5;
 
     [SerializeField]
-    private float brakeSpeed = 2;
-
-    [SerializeField]
     private float turnTorque = 150;
 
     private InputManager playerActions;
@@ -31,10 +28,21 @@ public class PlayerController : MonoBehaviour
 
     private float moveSpeed;
     
+    [SerializeField]
+    private Transform moveSphere;
+
+    public float groundDistance = 0.4f;
+    public LayerMask groundMask;
+
+    [SerializeField]
+    private float jumpForce;
+    
 
     public float turnSmoothTime = 1f;
     float turnSmoothVelocity;
+    bool isGrounded;
 
+    bool jumpInput = false;
     
 
 
@@ -44,6 +52,7 @@ public class PlayerController : MonoBehaviour
         playerActions = new InputManager();
 
         playerActions.Player.Move.performed += ctx => currentMovement = ctx.ReadValue<Vector2>();
+        playerActions.Player.Jump.performed += ctx => jumpInput = true;
     }
 
     private void Start() {
@@ -53,9 +62,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
         currentMovement = playerActions.Player.Move.ReadValue<Vector2>();
         moveVector = new Vector3(currentMovement.x, 0, currentMovement.y).normalized;
         transform.position = rb.transform.position;
+
+        
 
         float boardRotation = moveVector.x * turnTorque * Time.deltaTime;
         transform.Rotate(0, boardRotation, 0, Space.World);
@@ -65,6 +78,19 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        isGrounded = Physics.CheckSphere(moveSphere.position, groundDistance, groundMask);
+
+        if(isGrounded && moveVector.y < 0){
+            moveVector.y = -2f;
+        }
+
+        if(isGrounded && jumpInput)
+        {
+            Debug.Log("Jump");
+            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+            jumpInput = false;
+        }
+    
         if(moveVector.z > 0){
             moveSpeed += acceleration;
             moveSpeed = Mathf.Min(moveSpeed, maxSpeed);
@@ -82,6 +108,11 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void Jump()
+    {
+        Debug.Log("Jump");
+    }
+
 
     private void OnEnable()
     {
@@ -93,8 +124,5 @@ public class PlayerController : MonoBehaviour
         playerActions.Player.Disable();    
     }
 
-    public void movePlayer()
-    {
-       
-    }
+    
 }
