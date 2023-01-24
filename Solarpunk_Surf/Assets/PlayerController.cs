@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float turnTorque = 150;
+    
 
+    
     private InputManager playerActions;
 
     [SerializeField]
@@ -43,6 +45,8 @@ public class PlayerController : MonoBehaviour
     bool isGrounded;
 
     bool jumpInput = false;
+    bool isBoosting = false;
+    float defaultTurnTorque;
     
 
 
@@ -52,7 +56,10 @@ public class PlayerController : MonoBehaviour
         playerActions = new InputManager();
 
         playerActions.Player.Move.performed += ctx => currentMovement = ctx.ReadValue<Vector2>();
-        playerActions.Player.Jump.performed += ctx => jumpInput = true;
+        playerActions.Player.Jump.performed += _ => jumpInput = true;
+        
+
+        defaultTurnTorque = turnTorque;
     }
 
     private void Start() {
@@ -68,10 +75,10 @@ public class PlayerController : MonoBehaviour
         moveVector = new Vector3(currentMovement.x, 0, currentMovement.y).normalized;
         transform.position = rb.transform.position;
 
-        
+        playerActions.Player.Boost.performed += _ => isBoosting = true;
+        playerActions.Player.Boost.canceled += _ => isBoosting = false;
 
-        float boardRotation = moveVector.x * turnTorque * Time.deltaTime;
-        transform.Rotate(0, boardRotation, 0, Space.World);
+        
 
         
     }
@@ -100,9 +107,29 @@ public class PlayerController : MonoBehaviour
             moveSpeed = 5;
         }
 
+        if(isBoosting)
+        {
+            maxSpeed = 30f;
+            moveSpeed = maxSpeed;
+            Debug.Log("Is boosting");
+        }
+        else{
+            maxSpeed = 12f;
+            moveSpeed = Mathf.Min(moveSpeed, maxSpeed);
+        }
+
         if(moveVector != Vector3.zero){
             rb.AddForce(transform.forward * moveVector.z * moveSpeed, ForceMode.Acceleration);
         }
+        if(!isGrounded)
+        {
+            turnTorque = 200;
+        }
+        else{
+            turnTorque = defaultTurnTorque;
+        }
+        float boardRotation = moveVector.x * turnTorque * Time.deltaTime;
+        transform.Rotate(0, boardRotation, 0, Space.World);
         
         //Debug.Log(moveVector);
 
@@ -112,6 +139,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Jump");
     }
+
 
 
     private void OnEnable()
