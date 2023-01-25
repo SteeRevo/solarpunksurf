@@ -13,6 +13,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float turnTorque = 150;
+
+    [SerializeField]
+    private float fallMultiplier = 5f;
+
+    [SerializeField]
+    private float lowjumpMultiplier = 2.0f;
     
 
     
@@ -47,6 +53,7 @@ public class PlayerController : MonoBehaviour
     bool jumpInput = false;
     bool isBoosting = false;
     float defaultTurnTorque;
+    float originalSpeed;
     
 
 
@@ -57,13 +64,16 @@ public class PlayerController : MonoBehaviour
 
         playerActions.Player.Move.performed += ctx => currentMovement = ctx.ReadValue<Vector2>();
         playerActions.Player.Jump.performed += _ => jumpInput = true;
-        
-
+        playerActions.Player.Jump.canceled += _ => jumpInput = false;
+        playerActions.Player.Boost.performed += _ => isBoosting = true;
+        playerActions.Player.Boost.canceled += _ => isBoosting = false;
+    
+        originalSpeed = maxSpeed;
         defaultTurnTorque = turnTorque;
     }
 
     private void Start() {
-            rb.transform.parent = null;
+        rb.transform.parent = null;
     }
 
     // Update is called once per frame
@@ -75,11 +85,6 @@ public class PlayerController : MonoBehaviour
         moveVector = new Vector3(currentMovement.x, 0, currentMovement.y).normalized;
         transform.position = rb.transform.position;
 
-        playerActions.Player.Boost.performed += _ => isBoosting = true;
-        playerActions.Player.Boost.canceled += _ => isBoosting = false;
-
-        
-
         
     }
 
@@ -87,15 +92,19 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(moveSphere.position, groundDistance, groundMask);
 
-        if(isGrounded && moveVector.y < 0){
-            moveVector.y = -2f;
-        }
 
         if(isGrounded && jumpInput)
         {
             Debug.Log("Jump");
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
-            jumpInput = false;
+        }
+        if(rb.velocity.y < 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (lowjumpMultiplier - 1) * Time.deltaTime; 
+        }
+        else if (rb.velocity.y > 0 && !isGrounded && !jumpInput)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime; 
         }
     
         if(moveVector.z > 0){
@@ -114,8 +123,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Is boosting");
         }
         else{
-            maxSpeed = 12f;
-            moveSpeed = Mathf.Min(moveSpeed, maxSpeed);
+            maxSpeed = originalSpeed;
         }
 
         if(moveVector != Vector3.zero){
@@ -132,6 +140,7 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(0, boardRotation, 0, Space.World);
         
         //Debug.Log(moveVector);
+
 
     }
 
