@@ -53,6 +53,15 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""QuickDash"",
+                    ""type"": ""Button"",
+                    ""id"": ""a6560814-6e4c-4f20-a8d4-dcfbc28b4717"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -143,6 +152,17 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                     ""action"": ""Boost"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d429054-39a1-4e79-90cd-248e9f589db4"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""QuickDash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -154,6 +174,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
+        m_Player_QuickDash = m_Player.FindAction("QuickDash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -216,6 +237,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Boost;
+    private readonly InputAction m_Player_QuickDash;
     public struct PlayerActions
     {
         private @InputManager m_Wrapper;
@@ -223,6 +245,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Boost => m_Wrapper.m_Player_Boost;
+        public InputAction @QuickDash => m_Wrapper.m_Player_QuickDash;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -241,6 +264,9 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 @Boost.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBoost;
                 @Boost.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBoost;
                 @Boost.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBoost;
+                @QuickDash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickDash;
+                @QuickDash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickDash;
+                @QuickDash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickDash;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -254,6 +280,9 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 @Boost.started += instance.OnBoost;
                 @Boost.performed += instance.OnBoost;
                 @Boost.canceled += instance.OnBoost;
+                @QuickDash.started += instance.OnQuickDash;
+                @QuickDash.performed += instance.OnQuickDash;
+                @QuickDash.canceled += instance.OnQuickDash;
             }
         }
     }
@@ -263,5 +292,6 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
+        void OnQuickDash(InputAction.CallbackContext context);
     }
 }

@@ -44,6 +44,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float jumpForce;
+
+    [SerializeField]
+    private float boostForce;
     
 
     public float turnSmoothTime = 1f;
@@ -85,6 +88,12 @@ public class PlayerController : MonoBehaviour
         moveVector = new Vector3(currentMovement.x, 0, currentMovement.y).normalized;
         transform.position = rb.transform.position;
 
+        if(playerActions.Player.QuickDash.triggered)
+        {
+            Debug.Log("quick dash");
+            rb.AddForce(transform.forward * boostForce, ForceMode.Impulse);
+        }
+
         
     }
 
@@ -93,20 +102,15 @@ public class PlayerController : MonoBehaviour
         isGrounded = Physics.CheckSphere(moveSphere.position, groundDistance, groundMask);
 
 
-        if(isGrounded && jumpInput)
-        {
-            Debug.Log("Jump");
-            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
-        }
-        if(rb.velocity.y < 0)
-        {
-            rb.velocity += Vector3.up * Physics.gravity.y * (lowjumpMultiplier - 1) * Time.deltaTime; 
-        }
-        else if (rb.velocity.y > 0 && !isGrounded && !jumpInput)
-        {
-            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime; 
-        }
-    
+        Jump(isGrounded);
+
+        Boost();
+
+        Dash();
+
+        
+
+
         if(moveVector.z > 0){
             moveSpeed += acceleration;
             moveSpeed = Mathf.Min(moveSpeed, maxSpeed);
@@ -115,17 +119,7 @@ public class PlayerController : MonoBehaviour
         else{
             moveSpeed = 5;
         }
-
-        if(isBoosting)
-        {
-            maxSpeed = 30f;
-            moveSpeed = maxSpeed;
-            Debug.Log("Is boosting");
-        }
-        else{
-            maxSpeed = originalSpeed;
-        }
-
+        
         if(moveVector != Vector3.zero){
             rb.AddForce(transform.forward * moveVector.z * moveSpeed, ForceMode.Acceleration);
         }
@@ -144,9 +138,42 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void Jump()
+    void Jump(bool isGrounded)
     {
-        Debug.Log("Jump");
+        if(isGrounded && jumpInput)
+        {
+            Debug.Log("Jump");
+            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+        }
+        if(rb.velocity.y < 0 && !isGrounded)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (lowjumpMultiplier - 1) * Time.deltaTime; 
+        }
+        else if (rb.velocity.y > 0 && !isGrounded && !jumpInput)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime; 
+        }
+    
+        
+    }
+
+    private void Boost()
+    {
+        if(isBoosting)
+        {
+            maxSpeed = 30f;
+            moveSpeed = maxSpeed;
+            Debug.Log("Is boosting");
+        }
+        else{
+            maxSpeed = originalSpeed;
+        }
+    }
+
+    private void Dash()
+    {
+       return;
+
     }
 
 
