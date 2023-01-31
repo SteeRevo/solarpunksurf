@@ -113,6 +113,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  targetRange: 30
+  rotationSpeed: 2
+  firePosition: {fileID: 2948662280165896799}
+  projectile: {fileID: 2551336258633002162, guid: c7bc9124d42b80049a9385941372a8b2, type: 3}
+  delay: 2
+--- !u!1 &4309545434291166358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2948662280165896799}
+  m_Layer: 0
+  m_Name: BarrelEnd
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2948662280165896799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4309545434291166358}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 1.063, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3755481479341070664}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7626713669316570767
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +162,7 @@ GameObject:
   - component: {fileID: 4643240602630287205}
   - component: {fileID: 7861082468966692283}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,10 +176,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7626713669316570767}
   m_LocalRotation: {x: 0.7071065, y: -0.00000033717464, z: -0.0000003371749, w: 0.7071072}
-  m_LocalPosition: {x: 0, y: 0.545, z: 0.694}
+  m_LocalPosition: {x: 0, y: 0.55, z: 0.69}
   m_LocalScale: {x: 0.45187226, y: 0.45187226, z: 0.45187226}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2948662280165896799}
   m_Father: {fileID: 5058422581867776909}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
