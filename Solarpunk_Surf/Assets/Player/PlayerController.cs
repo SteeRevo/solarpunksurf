@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+ using UnityEngine.UI;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,8 +22,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float lowjumpMultiplier = 2.0f;
     
+    // slider //
+    [SerializeField]
+    private Slider BoostMeter;
 
-    
+    [HideInInspector] public BoostMeterScript _boostMeterScript;
+
+    //** **//
+
     private InputManager playerActions;
 
     [SerializeField]
@@ -76,6 +84,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Start() {
+        _boostMeterScript = GameObject.Find("Slider").GetComponent<BoostMeterScript>();
+       
         rb.transform.parent = null;
     }
 
@@ -159,15 +169,21 @@ public class PlayerController : MonoBehaviour
 
     private void Boost()
     {
-        if(isBoosting)
+        
+        // StartCoroutine(_boostMeterScript.regenBoostMeter());
+        if(isBoosting && BoostMeter.value > 1)
         {
             maxSpeed = 30f;
             moveSpeed = maxSpeed;
             Debug.Log("Is boosting");
+            BoostMeter.value -= 1;
+            Debug.Log("inside player boost,"+ BoostMeter.value);
         }
         else{
+            Debug.Log("stopped boosting boosting" + maxSpeed);
             maxSpeed = originalSpeed;
         }
+        _boostMeterScript.Update();
     }
 
     private void Dash()
