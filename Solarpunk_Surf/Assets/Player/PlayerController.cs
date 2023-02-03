@@ -47,6 +47,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float boostForce;
+
+    [SerializeField]
+    private ParticleSystem particles;
     
 
     public float turnSmoothTime = 1f;
@@ -104,9 +107,18 @@ public class PlayerController : MonoBehaviour
             var relative = (transform.position + moveVector) - transform.position;
             var rot = Quaternion.LookRotation(relative, Vector3.up);
 
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnTorque * Time.deltaTime); 
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnTorque * Time.deltaTime);
+            
+            if(!particles.isPlaying) particles.Play();
+            Debug.Log("emitting particles");
+        }
+        else{
+            if(particles.isPlaying) particles.Stop();
+            Debug.Log("partciles stopped");
         }
 
+        particles.transform.position = new Vector3(transform.position.x-2, transform.position.y - 1, transform.position.z+2);
+        particles.transform.rotation = new Quaternion(180, transform.rotation.y, 0, 1);
         
     }
 
@@ -130,6 +142,7 @@ public class PlayerController : MonoBehaviour
         if(moveVector != Vector3.zero){
             rb.AddForce(moveVector * moveSpeed, ForceMode.Acceleration);
         }
+       
         if(!isGrounded)
         {
             turnTorque = 200;
