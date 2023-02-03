@@ -55,6 +55,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float boostForce;
+
+    [SerializeField]
+    private ParticleSystem particles;
     
 
     public float turnSmoothTime = 1f;
@@ -98,12 +101,34 @@ public class PlayerController : MonoBehaviour
         moveVector = new Vector3(currentMovement.x, 0, currentMovement.y).normalized;
         transform.position = rb.transform.position;
 
+        var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, -45, 0));
+        moveVector = matrix.MultiplyPoint3x4(moveVector);
+
         if(playerActions.Player.QuickDash.triggered)
         {
             Debug.Log("quick dash");
             rb.AddForce(transform.forward * boostForce, ForceMode.Impulse);
         }
 
+        if(moveVector != Vector3.zero)
+        {
+           
+
+            var relative = (transform.position + moveVector) - transform.position;
+            var rot = Quaternion.LookRotation(relative, Vector3.up);
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnTorque * Time.deltaTime);
+            
+            if(!particles.isPlaying) particles.Play();
+            Debug.Log("emitting particles");
+        }
+        else{
+            if(particles.isPlaying) particles.Stop();
+            Debug.Log("partciles stopped");
+        }
+
+        particles.transform.position = new Vector3(transform.position.x-2, transform.position.y - 1, transform.position.z+2);
+        particles.transform.rotation = new Quaternion(180, transform.rotation.y, 0, 1);
         
     }
 
@@ -121,18 +146,13 @@ public class PlayerController : MonoBehaviour
         
 
 
-        if(moveVector.z > 0){
-            moveSpeed += acceleration;
-            moveSpeed = Mathf.Min(moveSpeed, maxSpeed);
-        }
-
-        else{
-            moveSpeed = 5;
-        }
+        moveSpeed += acceleration;
+        moveSpeed = Mathf.Min(moveSpeed, maxSpeed);
         
         if(moveVector != Vector3.zero){
-            rb.AddForce(transform.forward * moveVector.z * moveSpeed, ForceMode.Acceleration);
+            rb.AddForce(moveVector * moveSpeed, ForceMode.Acceleration);
         }
+       
         if(!isGrounded)
         {
             turnTorque = 200;
@@ -140,8 +160,8 @@ public class PlayerController : MonoBehaviour
         else{
             turnTorque = defaultTurnTorque;
         }
-        float boardRotation = moveVector.x * turnTorque * Time.deltaTime;
-        transform.Rotate(0, boardRotation, 0, Space.World);
+        //float boardRotation = moveVector.x * turnTorque * Time.deltaTime;
+        //transform.Rotate(0, boardRotation, 0, Space.World);
         
         //Debug.Log(moveVector);
 
