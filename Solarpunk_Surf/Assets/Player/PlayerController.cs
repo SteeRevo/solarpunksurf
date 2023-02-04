@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Start() {
-        _boostMeterScript = GameObject.Find("Slider").GetComponent<BoostMeterScript>();
+        _boostMeterScript = BoostMeter.GetComponent<BoostMeterScript>();
        
         rb.transform.parent = null;
     }
