@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed;
-    public float lifetime;
+    
+
+    
+
+    [SerializeField]
+    public int Damage { get; private set; }
+
+    [SerializeField]
+    private float speed = 5;
+    [SerializeField]
+    private float lifetime = 12;
     private float time;
     // Start is called before the first frame update
     void Start()
@@ -24,3 +33,4 @@ public class Projectile : MonoBehaviour
         }
     }
 }
+
