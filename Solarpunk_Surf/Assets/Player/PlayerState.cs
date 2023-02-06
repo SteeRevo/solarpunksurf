@@ -14,11 +14,13 @@ public class PlayerState : MonoBehaviour
     public int Health
     {
         get {return health;}
+
         set
         {
             health = value;
-            healthMeter.value = (health / maxHealth) * 100;
-            Debug.Log(healthMeter.value);
+            Debug.Log(health);
+
+            healthMeter.value = Mathf.InverseLerp(0, maxHealth, health) * 100;
             if (health <= 0)
             {
                 Debug.Log("game over");
@@ -39,17 +41,6 @@ public class PlayerState : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider collider)
-    {
-        Debug.Log("collision!");
-        // damaging objects must have tag 'DamageVolume' for now
-        if (collider.gameObject.tag == "DamageVolume")
-        {
-            Debug.Log("collision!");
-            // this only works with projectiles atm
-            Health -= collider.GetComponent<Projectile>().Damage;
-        }
-
-    }
+    
 
 }

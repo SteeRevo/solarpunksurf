@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    
 
-    
+
 
     [SerializeField]
-    public int Damage { get; private set; }
-
+    private int damage = 5;
     [SerializeField]
     private float speed = 5;
     [SerializeField]
@@ -31,6 +29,18 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        //Debug.Log("collision!");
+        if (collider.gameObject.tag == "Player")
+        {
+            Debug.Log("player!");
+            //Debug.Log(damage);
+            collider.gameObject.GetComponent<PlayerState>().Health -= damage;
+        }
+
     }
 }
 
