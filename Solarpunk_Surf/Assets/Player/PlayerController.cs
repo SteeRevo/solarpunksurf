@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
 
     bool jumpInput = false;
     bool isBoosting = false;
+    bool overheated = false;
     float defaultTurnTorque;
     float originalSpeed;
     
@@ -119,16 +120,21 @@ public class PlayerController : MonoBehaviour
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnTorque * Time.deltaTime);
             
-            if(!particles.isPlaying) particles.Play();
-            Debug.Log("emitting particles");
+            //if(!particles.isPlaying) particles.Play();
+            //Debug.Log("emitting particles");
         }
         else{
-            if(particles.isPlaying) particles.Stop();
-            Debug.Log("partciles stopped");
+            //if(particles.isPlaying) particles.Stop();
+            //Debug.Log("partciles stopped");
         }
 
-        particles.transform.position = new Vector3(transform.position.x-2, transform.position.y - 1, transform.position.z+2);
-        particles.transform.rotation = new Quaternion(180, transform.rotation.y, 0, 1);
+        //particles.transform.position = new Vector3(transform.position.x-2, transform.position.y - 1, transform.position.z+2);
+        //particles.transform.rotation = new Quaternion(180, transform.rotation.y, 0, 1);
+
+        if(overheated && BoostMeter.value == 100)
+        {
+            overheated = false;
+        }
         
     }
 
@@ -170,6 +176,7 @@ public class PlayerController : MonoBehaviour
 
     void Jump(bool isGrounded)
     {
+       
         if(isGrounded && jumpInput)
         {
             Debug.Log("Jump");
@@ -191,14 +198,19 @@ public class PlayerController : MonoBehaviour
     {
         
         // StartCoroutine(_boostMeterScript.regenBoostMeter());
-        if(isBoosting && BoostMeter.value > 1)
+        if(isBoosting && BoostMeter.value > 1 && !overheated) 
         {
             maxSpeed = 30f;
             moveSpeed = maxSpeed;
             Debug.Log("Is boosting");
             BoostMeter.value -= 1;
             Debug.Log("inside player boost,"+ BoostMeter.value);
+            if(BoostMeter.value <= 1)
+            {
+                overheated = true;
+            }
         }
+        
         else{
             Debug.Log("stopped boosting boosting" + maxSpeed);
             maxSpeed = originalSpeed;
