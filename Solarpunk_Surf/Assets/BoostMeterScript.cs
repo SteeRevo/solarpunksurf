@@ -22,7 +22,7 @@ public class BoostMeterScript : MonoBehaviour
 
     public void Update() {
         // boostMeterSlider.value += maxMeterVal/100 * Time.deltaTime;
-        boostMeterSlider.value += 3 * Time.deltaTime;
+        boostMeterSlider.value += 10 * Time.deltaTime;
         boostMeterSlider.value = Mathf.Clamp(boostMeterSlider.value, 0, maxMeterVal);
     }
     
