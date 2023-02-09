@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     private float jumpForce;
 
     [SerializeField]
-    private float boostForce;
+    private float dashForce;
 
     [SerializeField]
     private ParticleSystem particles;
@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
     bool jumpInput = false;
     bool isBoosting = false;
     bool overheated = false;
+
     float defaultTurnTorque;
     float originalSpeed;
     
@@ -96,6 +97,27 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(playerActions.Player.QuickDash.triggered && !overheated)
+        {
+            if(moveVector == Vector3.zero)
+            {
+                rb.velocity = Vector3.zero;
+                rb.AddForce(transform.forward * dashForce, ForceMode.VelocityChange);
+            }
+            else
+            {
+                rb.velocity = Vector3.zero;
+                rb.AddForce(moveVector * dashForce, ForceMode.VelocityChange);
+            }
+           
+            BoostMeter.value -= 50;
+            if(BoostMeter.value <= 0)
+            {
+                overheated = true;
+            }
+            
+        }
         
         
         currentMovement = playerActions.Player.Move.ReadValue<Vector2>();
@@ -105,11 +127,6 @@ public class PlayerController : MonoBehaviour
         var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, -45, 0));
         moveVector = matrix.MultiplyPoint3x4(moveVector);
 
-        if(playerActions.Player.QuickDash.triggered)
-        {
-            Debug.Log("quick dash");
-            rb.AddForce(transform.forward * boostForce, ForceMode.Impulse);
-        }
 
         if(moveVector != Vector3.zero)
         {
@@ -147,9 +164,14 @@ public class PlayerController : MonoBehaviour
 
         Boost();
 
-        Dash();
-
         
+       
+
+      
+
+
+
+         
 
 
         moveSpeed += acceleration;
@@ -212,17 +234,12 @@ public class PlayerController : MonoBehaviour
         }
         
         else{
-            Debug.Log("stopped boosting boosting" + maxSpeed);
+            //Debug.Log("stopped boosting boosting" + maxSpeed);
             maxSpeed = originalSpeed;
         }
         _boostMeterScript.Update();
     }
 
-    private void Dash()
-    {
-       return;
-
-    }
 
 
 

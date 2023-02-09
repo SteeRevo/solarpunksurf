@@ -156,7 +156,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5d429054-39a1-4e79-90cd-248e9f589db4"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
