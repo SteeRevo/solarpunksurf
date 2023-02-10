@@ -29,7 +29,7 @@ public class Turret : MonoBehaviour
         //easy way
         // transform.LookAt(target);
         // the second argument, upwards, defaults to Vector3.up
-
+        
         Vector3 targetPos = new Vector3(target.position.x, transform.position.y, target.position.z);
         Vector3 relativePos = targetPos - transform.position;
         if (relativePos.magnitude < targetRange)
