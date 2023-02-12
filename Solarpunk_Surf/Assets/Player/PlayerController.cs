@@ -72,7 +72,8 @@ public class PlayerController : MonoBehaviour
     float originalSpeed;
     
 
-
+    public float boostCounter = 0.0f;
+    public float noBoostCounter = 0.0f;
 
     private void Awake()
     {
@@ -219,28 +220,46 @@ public class PlayerController : MonoBehaviour
     private void Boost()
     {
         
-        // StartCoroutine(_boostMeterScript.regenBoostMeter());
         if(isBoosting && BoostMeter.value > 1 && !overheated) 
         {
+            noBoostCounter = 0.0f;
+            boostCounter += 1f * Time.deltaTime;
+            Debug.Log("boostCounter: "+ boostCounter);
             maxSpeed = 30f;
             moveSpeed = maxSpeed;
-            Debug.Log("Is boosting");
+            // Debug.Log("Is boosting");
             BoostMeter.value -= 1;
-            Debug.Log("inside player boost,"+ BoostMeter.value);
+            // Debug.Log("inside player boost,"+ BoostMeter.value);
             if(BoostMeter.value <= 1)
             {
                 overheated = true;
             }
         }
-        
-        else{
-            //Debug.Log("stopped boosting boosting" + maxSpeed);
-            maxSpeed = originalSpeed;
+        else if (!isBoosting && BoostMeter.value > 1 && !overheated) {
+            Debug.Log("!!stopped boosting counter: "+ boostCounter);
+            boostCounter = 0.0f;
+            noBoostCounter += 1f * Time.deltaTime;
+            Debug.Log("!!noBoostCounter: "+ noBoostCounter);
+            if (noBoostCounter > 0.0 && noBoostCounter < 2.0) {
+                _boostMeterScript.Invoke("regenBoostMeter", 2.0f);
+            } 
+            else if (noBoostCounter > 2.0) {
+                _boostMeterScript.regenBoostMeter();
+                maxSpeed = originalSpeed;
+            }
+        } else {
+            _boostMeterScript.regenBoostMeter();
         }
-        _boostMeterScript.Update();
+
+    }
+    public IEnumerator waitTimer() {
+        yield return new WaitForSeconds(2.0f);
     }
 
-
+    // public void regenBoostMeter() {
+    //     _boostMeterScript.boostMeterSlider.value += 10 * Time.deltaTime;
+    //     _boostMeterScript.boostMeterSlider.value = Mathf.Clamp(_boostMeterScript.boostMeterSlider.value, 0, 100);
+    // }
 
 
     private void OnEnable()
