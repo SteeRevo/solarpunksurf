@@ -56,8 +56,8 @@ Material:
     - _CastShadows: 1
     - _Cull: 2
     - _DstBlend: 10
-    - _FoamAmount: 1
-    - _FoamCutoff: 0.8
+    - _FoamAmount: 2
+    - _FoamCutoff: 0.9
     - _FoamSpeed: 1
     - _Foamscale: 300
     - _QueueControl: 1

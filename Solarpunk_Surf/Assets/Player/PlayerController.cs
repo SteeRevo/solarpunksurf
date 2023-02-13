@@ -57,7 +57,10 @@ public class PlayerController : MonoBehaviour
     private float dashForce;
 
     [SerializeField]
-    private ParticleSystem particles;
+    private ParticleSystem ripple;
+
+    [SerializeField]
+    private Shader waterShader;
     
 
     public float turnSmoothTime = 1f;
@@ -70,7 +73,7 @@ public class PlayerController : MonoBehaviour
 
     float defaultTurnTorque;
     float originalSpeed;
-    
+    Color32 color = new Color(0.5f, 1f, 1f, 1f);
 
     public float boostCounter = 0.0f;
     public float noBoostCounter = 0.0f;
@@ -98,6 +101,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
 
         if(playerActions.Player.QuickDash.triggered && !overheated)
         {
@@ -138,16 +143,20 @@ public class PlayerController : MonoBehaviour
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnTorque * Time.deltaTime);
             
-            //if(!particles.isPlaying) particles.Play();
-            //Debug.Log("emitting particles");
+            
+            ripple.Play();
+            ripple.transform.position = transform.position;
+           
+
+            
+    
         }
         else{
-            //if(particles.isPlaying) particles.Stop();
-            //Debug.Log("partciles stopped");
+            ripple.Stop();
         }
-
-        //particles.transform.position = new Vector3(transform.position.x-2, transform.position.y - 1, transform.position.z+2);
-        //particles.transform.rotation = new Quaternion(180, transform.rotation.y, 0, 1);
+        
+        
+       
 
         if(overheated && BoostMeter.value == 100)
         {
@@ -260,6 +269,21 @@ public class PlayerController : MonoBehaviour
     //     _boostMeterScript.boostMeterSlider.value += 10 * Time.deltaTime;
     //     _boostMeterScript.boostMeterSlider.value = Mathf.Clamp(_boostMeterScript.boostMeterSlider.value, 0, 100);
     // }
+
+    /*
+    private void createRipple(int start, int end, int delta, float speed, float size, float lifetime)
+    {
+        Vector3 forward = ripple.transform.eulerAngles;
+        forward.y = start;
+        ripple.transform.eulerAngles = forward;
+        Color32 color = new Color(0.5f, 1f, 1f, 1f);
+        
+        for(int i = 0; i < end; i+=delta)
+        {
+            ripple.Emit(transform.position + ripple.transform.forward * 0.5f, ripple.transform.forward * speed, size, lifetime, color);
+            ripple.transform.eulerAngles += Vector3.up * 3;
+        }
+    }*/
 
 
     private void OnEnable()
