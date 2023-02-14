@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
     public float turnSmoothTime = 1f;
     float turnSmoothVelocity;
     bool isGrounded;
+    bool playParticles = false;
 
     bool jumpInput = false;
     bool isBoosting = false;
@@ -133,6 +134,9 @@ public class PlayerController : MonoBehaviour
         var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, -45, 0));
         moveVector = matrix.MultiplyPoint3x4(moveVector);
 
+        //Vector3 ripplePlacement = new Vector3(transform.position.x+0.5f, transform.position.y, transform.position.z - 1);
+        //ripple.transform.position = ripplePlacement;
+
 
         if(moveVector != Vector3.zero)
         {
@@ -143,16 +147,27 @@ public class PlayerController : MonoBehaviour
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnTorque * Time.deltaTime);
             
+            if(!playParticles && isGrounded){
+                ripple.Play();
+                playParticles = true;
+            }
+            else if(!isGrounded)
+            {
+                ripple.Stop();
+                playParticles = false;
+            }
             
-            ripple.Play();
-            ripple.transform.position = transform.position;
            
 
             
     
         }
         else{
-            ripple.Stop();
+            if(playParticles){
+                ripple.Stop();
+                playParticles = false;
+            }
+            
         }
         
         
