@@ -9,6 +9,7 @@ public class BoostMeterScript : MonoBehaviour
     public int currentVal = 100;
 
     public Slider boostMeterSlider;
+    public Image boostSun;
 
     public WaitForSeconds regenTick = new WaitForSeconds(0.1f);
 
@@ -16,13 +17,16 @@ public class BoostMeterScript : MonoBehaviour
         boostMeterSlider = GetComponent<Slider>();
         Debug.Log(boostMeterSlider.value);
         boostMeterSlider.value = 100; 
+        boostSun.fillAmount = 1;
         Debug.Log(boostMeterSlider.value);
     }
 
 
     public void regenBoostMeter() {
-        boostMeterSlider.value += 10 * Time.deltaTime;
+        boostMeterSlider.value += 20 * Time.deltaTime;
+        //boostSun.fillAmount += .1f * Time.deltaTime;
         boostMeterSlider.value = Mathf.Clamp(boostMeterSlider.value, 0, maxMeterVal);
+        //boostSun.fillAmount = Mathf.Clamp(boostMeterSlider.value/100, 0, maxMeterVal/100);
     }
 
 

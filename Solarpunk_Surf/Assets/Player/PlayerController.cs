@@ -26,6 +26,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Slider BoostMeter;
 
+     [SerializeField]
+    private Image BoostSun;
+
+    
+
     [HideInInspector] public BoostMeterScript _boostMeterScript;
 
     //** **//
@@ -102,7 +107,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        BoostSun.fillAmount = BoostMeter.value/100;
 
 
         if(playerActions.Player.QuickDash.triggered && !overheated)
@@ -118,7 +123,8 @@ public class PlayerController : MonoBehaviour
                 rb.AddForce(moveVector * dashForce, ForceMode.VelocityChange);
             }
            
-            BoostMeter.value -= 50;
+            BoostMeter.value -= 25;
+            
             if(BoostMeter.value <= 0)
             {
                 overheated = true;
@@ -249,7 +255,7 @@ public class PlayerController : MonoBehaviour
             noBoostCounter = 0.0f;
             boostCounter += 1f * Time.deltaTime;
             Debug.Log("boostCounter: "+ boostCounter);
-            maxSpeed = 30f;
+            maxSpeed = 40f;
             moveSpeed = maxSpeed;
             // Debug.Log("Is boosting");
             BoostMeter.value -= 1;
@@ -262,22 +268,24 @@ public class PlayerController : MonoBehaviour
         else if (!isBoosting && BoostMeter.value > 1 && !overheated) {
             Debug.Log("!!stopped boosting counter: "+ boostCounter);
             boostCounter = 0.0f;
-            noBoostCounter += 1f * Time.deltaTime;
+            noBoostCounter += 2f * Time.deltaTime;
             Debug.Log("!!noBoostCounter: "+ noBoostCounter);
             if (noBoostCounter > 0.0 && noBoostCounter < 2.0) {
                 _boostMeterScript.Invoke("regenBoostMeter", 2.0f);
             } 
             else if (noBoostCounter > 2.0) {
                 _boostMeterScript.regenBoostMeter();
-                maxSpeed = originalSpeed;
+                //maxSpeed = originalSpeed;
             }
+            maxSpeed = originalSpeed;
         } else {
             _boostMeterScript.regenBoostMeter();
+            maxSpeed = originalSpeed;
         }
 
     }
     public IEnumerator waitTimer() {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(0.5f);
     }
 
     // public void regenBoostMeter() {
