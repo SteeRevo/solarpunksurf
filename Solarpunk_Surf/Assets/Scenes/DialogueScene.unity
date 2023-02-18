@@ -553,6 +553,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecaeb8f0e51e0479887d6d924e50850d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textJSON: {fileID: 4900000, guid: bf304f92938234955acd6a0bc59627bc, type: 3}
+  myDialogueList:
+    DialogueLines: []
   textComponent: {fileID: 1521330706}
   lines:
   - 'test '
