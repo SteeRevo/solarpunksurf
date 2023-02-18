@@ -29,10 +29,6 @@ public class PlayerController : MonoBehaviour
      [SerializeField]
     private Image BoostSun;
 
-    [SerializeField]
-    private AudioSource Audio;
-
-    
 
     [HideInInspector] public BoostMeterScript _boostMeterScript;
 
@@ -49,6 +45,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Rigidbody rb;
 
+    private AudioSource Audio;
 
     private float moveSpeed;
     

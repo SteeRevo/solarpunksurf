@@ -10709,6 +10709,7 @@ MonoBehaviour:
   lowjumpMultiplier: 5
   BoostMeter: {fileID: 1844623504}
   BoostSun: {fileID: 1684246675}
+  Audio: {fileID: 0}
   _boostMeterScript: {fileID: 0}
   playerCamera: {fileID: 0}
   rb: {fileID: 1921455606}
@@ -10849,7 +10850,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
