@@ -1,0 +1,12 @@
+{
+    "DialogueLines": [
+        {
+            "speaker": "JaneDoe",
+            "message": "the cow jumped over the moon"
+        },
+        {
+            "speaker": "JaneDoe",
+            "message": "ahhhh test"
+        }
+    ]
+}

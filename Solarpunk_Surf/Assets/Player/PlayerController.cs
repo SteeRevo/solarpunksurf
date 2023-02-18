@@ -266,10 +266,10 @@ public class PlayerController : MonoBehaviour
             }
         }
         else if (!isBoosting && BoostMeter.value > 1 && !overheated) {
-            Debug.Log("!!stopped boosting counter: "+ boostCounter);
+            // Debug.Log("!!stopped boosting counter: "+ boostCounter);
             boostCounter = 0.0f;
             noBoostCounter += 2f * Time.deltaTime;
-            Debug.Log("!!noBoostCounter: "+ noBoostCounter);
+            // Debug.Log("!!noBoostCounter: "+ noBoostCounter);
             if (noBoostCounter > 0.0 && noBoostCounter < 2.0) {
                 _boostMeterScript.Invoke("regenBoostMeter", 2.0f);
             } 
@@ -309,13 +309,15 @@ public class PlayerController : MonoBehaviour
     }*/
 
 
-    private void OnEnable()
+    public void OnEnable()
     {
+        Debug.Log("player movement enabled");
         playerActions.Player.Enable();
     }
     
-
-    private void OnDisable() {
+    // changed this from private to public so the dialogue trigger can access
+    public void OnDisable() {
+        Debug.Log("diabled player movement");
         playerActions.Player.Disable();    
     }
 
