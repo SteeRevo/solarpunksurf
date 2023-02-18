@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
      [SerializeField]
     private Image BoostSun;
 
+    [SerializeField]
+    private AudioSource Audio;
+
     
 
     [HideInInspector] public BoostMeterScript _boostMeterScript;
@@ -100,7 +103,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start() {
         _boostMeterScript = BoostMeter.GetComponent<BoostMeterScript>();
-       
+        Audio = GetComponent<AudioSource>();
         rb.transform.parent = null;
     }
 
@@ -155,11 +158,13 @@ public class PlayerController : MonoBehaviour
             
             if(!playParticles && isGrounded){
                 ripple.Play();
+                Audio.Play();
                 playParticles = true;
             }
             else if(!isGrounded)
             {
                 ripple.Stop();
+                Audio.Pause();
                 playParticles = false;
             }
             
@@ -171,6 +176,7 @@ public class PlayerController : MonoBehaviour
         else{
             if(playParticles){
                 ripple.Stop();
+                Audio.Pause();
                 playParticles = false;
             }
             
