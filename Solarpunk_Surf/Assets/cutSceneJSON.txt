@@ -1,12 +1,19 @@
 {
     "DialogueLines": [
         {
+            "id": 1,
             "speaker": "JaneDoe",
-            "message": "the cow jumped over the moon"
+            "message": "When shall we three meet again?"
         },
         {
+            "id": 2,
             "speaker": "JaneDoe",
-            "message": "ahhhh test"
+            "message": "In thunder, lightning, or in rain?"
+        },
+        {
+            "id": 3,
+            "speaker": "JaneDoe",
+            "message": "When the hurlyburly's done, When the battle's lost and won."
         }
-    ]
+    ],
 }

@@ -25,16 +25,16 @@ public class DialogueTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider col) {
         if (col.tag == "Player") {
             Debug.Log("Collision detected");
-            // PlayerController_script.OnDisable();
+            PlayerController_script.OnDisable();
             DialogueBox2.SetActive(true);
             Dialogue_script.StartDialogue();
             // Dialogue_script.DialogueSystem();
         }
     }
 
-    private void OnTriggerExit(Collider col) {
-        // PlayerController_script.OnEnable();
-        DialogueBox2.SetActive(false);
-    }
+    // private void OnTriggerExit(Collider col) {
+    //     // PlayerController_script.OnEnable();
+    //     DialogueBox2.SetActive(false);
+    // }
 
 }

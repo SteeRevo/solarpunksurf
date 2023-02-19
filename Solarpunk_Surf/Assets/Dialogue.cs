@@ -6,60 +6,57 @@ using TMPro;
 
 public class Dialogue : MonoBehaviour
 {
-    public TextAsset textJSON;
+    // accessing json info
+    // public TextAsset textJSON;
 
-    [System.Serializable]
-    public class DialogueClass {
-        public string speaker;
-        public string message;
-    }
+    // [System.Serializable]
+    // public class DialogueClass {
+    //     public int id;
+    //     public string speaker;
+    //     public string message;
+    // }
 
-    [System.Serializable]
-    public class DialogueList {
-        public DialogueClass[] DialogueLines;
-    }
+    // [System.Serializable]
+    // public class DialogueList {
+    //     public DialogueClass[] DialogueLines;
+    // }
 
-    public DialogueList myDialogueList = new DialogueList();
-
-    //
+    // public DialogueList myDialogueList = new DialogueList();
+    // accessing json info above
+    
     public TextMeshProUGUI textComponent;
-    public string[] lines;
+    public string[] Lines; 
     public float textSpeed;
 
     private int index;
 
     public PlayerController PlayerController_script;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        myDialogueList = JsonUtility.FromJson<DialogueList>(textJSON.text);
-        textComponent.text = "";
+    void Awake() {
+        Lines = new string[] {
+            "Sweno, the Norways' king, craves composition:",
+            "Nor would we deign him burial of his men",
+            "Till he disbursed at Saint Colme's inch",
+            "Ten thousand dollars to our general use."
+        };
+
+    }
+
+    void Start() {
         gameObject.SetActive(false);
+        textComponent.text = string.Empty;
+        // myDialogueList = JsonUtility.FromJson<DialogueList>(textJSON.text);
     }
 
     // Update is called once per frame
     void Update() {
-        // NextLine();
         if (Input.GetMouseButtonDown(0)) {
-            if (textComponent.text == lines[index]) {
+            if (textComponent.text == Lines[index]) {
                 NextLine();
             }
             else {
                 StopAllCoroutines();
-                textComponent.text = lines[index];
-            }
-        }
-    }
-    public void DialogueSystem() {
-        StartDialogue();
-        if (Input.GetMouseButtonDown(0)) {
-            if (textComponent.text == lines[index]) {
-                NextLine();
-            }
-            else {
-                StopAllCoroutines();
-                textComponent.text = lines[index];
+                textComponent.text = Lines[index];
             }
         }
     }
@@ -70,14 +67,26 @@ public class Dialogue : MonoBehaviour
     }
 
     public IEnumerator TypeLine() {
-        foreach(char c in lines[index].ToCharArray()) {
+
+        textComponent.text = string.Empty;
+        foreach(char c in Lines[index].ToCharArray()) {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+
+        // this code is for accessing the json file
+        // textComponent.text = string.Empty;
+        // foreach(DialogueClass dialogue in myDialogueList.DialogueLines) {
+        //     Debug.Log(dialogue.id);
+        //     foreach(char c in dialogue.message.ToCharArray()) {
+        //         textComponent.text += c;
+        //         yield return new WaitForSeconds(textSpeed);
+        //     }
+        // }
     }
+
     void NextLine() {
-        // Debug.Log(lines.Length);
-        if (index < lines.Length - 1) {
+        if (index < Lines.Length - 1) {
             index++;
             textComponent.text = "";
             StartCoroutine(TypeLine());
