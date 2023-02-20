@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Rigidbody rb;
 
-    private AudioSource Audio;
+    private AudioSource audioSource;
 
     private float moveSpeed;
     
@@ -66,7 +66,15 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Shader waterShader;
-    
+
+    [SerializeField]
+    private AudioClip jumpSound;
+
+    [SerializeField]
+    private AudioClip landSound;
+
+    [SerializeField]
+    private AudioClip dashSound;
 
     public float turnSmoothTime = 1f;
     float turnSmoothVelocity;
@@ -100,7 +108,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start() {
         _boostMeterScript = BoostMeter.GetComponent<BoostMeterScript>();
-        Audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         rb.transform.parent = null;
     }
 
@@ -129,6 +137,8 @@ public class PlayerController : MonoBehaviour
             {
                 overheated = true;
             }
+
+            audioSource.PlayOneShot(dashSound, 0.5f);
             
         }
         
@@ -155,14 +165,17 @@ public class PlayerController : MonoBehaviour
             
             if(!playParticles && isGrounded){
                 ripple.Play();
-                Audio.Play();
                 playParticles = true;
+
+                audioSource.Play();
+                audioSource.PlayOneShot(landSound, 0.5f);
             }
             else if(!isGrounded)
             {
                 ripple.Stop();
-                Audio.Pause();
                 playParticles = false;
+
+                audioSource.Pause();
             }
             
            
@@ -173,7 +186,7 @@ public class PlayerController : MonoBehaviour
         else{
             if(playParticles){
                 ripple.Stop();
-                Audio.Pause();
+                audioSource.Pause();
                 playParticles = false;
             }
             
@@ -198,14 +211,6 @@ public class PlayerController : MonoBehaviour
 
         Boost();
 
-        
-       
-
-      
-
-
-
-         
 
 
         moveSpeed += acceleration;
@@ -237,6 +242,8 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Jump");
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+
+            audioSource.PlayOneShot(jumpSound, 0.5f);
         }
         if(rb.velocity.y < 0 && !isGrounded)
         {

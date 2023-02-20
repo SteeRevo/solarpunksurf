@@ -10709,7 +10709,6 @@ MonoBehaviour:
   lowjumpMultiplier: 5
   BoostMeter: {fileID: 1844623504}
   BoostSun: {fileID: 1684246675}
-  Audio: {fileID: 0}
   _boostMeterScript: {fileID: 0}
   playerCamera: {fileID: 0}
   rb: {fileID: 1921455606}
@@ -10722,6 +10721,9 @@ MonoBehaviour:
   dashForce: 20
   ripple: {fileID: 1813327859}
   waterShader: {fileID: -6465566751694194690, guid: d249d69c7b4063b43a22c515f33a1395, type: 3}
+  jumpSound: {fileID: 8300000, guid: b4c3637a84e92c943a654a44ada19c12, type: 3}
+  landSound: {fileID: 8300000, guid: 504927527ec6f044ab9be87ebaccfe83, type: 3}
+  dashSound: {fileID: 8300000, guid: 94077a53627c86f4bacb955a2512e330, type: 3}
   turnSmoothTime: 0.1
   boostCounter: 0
   noBoostCounter: 0
@@ -10846,7 +10848,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a56ace78da4d1ae4cb41b5ff9be63274, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5512ea51c704aa44a8e0016f2544c84b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -16578,7 +16580,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5512ea51c704aa44a8e0016f2544c84b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1c1c17a9171cb744482269907b931078, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
