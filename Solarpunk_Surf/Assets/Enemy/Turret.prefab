@@ -114,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   targetRange: 30
-  rotationSpeed: 2
+  rotationSpeed: 20
   firePosition: {fileID: 2948662280165896799}
   projectile: {fileID: 2551336258633002162, guid: c7bc9124d42b80049a9385941372a8b2, type: 3}
   delay: 2

@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
     
         originalSpeed = maxSpeed;
         defaultTurnTorque = turnTorque;
+        ripple.Stop();
     }
 
     private void Start() {

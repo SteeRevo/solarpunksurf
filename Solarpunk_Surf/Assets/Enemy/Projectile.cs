@@ -39,7 +39,13 @@ public class Projectile : MonoBehaviour
             Debug.Log("player!");
             //Debug.Log(damage);
             collider.gameObject.GetComponent<PlayerState>().Health -= damage;
+            Destroy(gameObject);
         }
+        if (collider.gameObject.tag == "Building")
+        {
+            Destroy(gameObject);
+        }
+        
 
     }
 }
