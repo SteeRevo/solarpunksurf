@@ -6,46 +6,24 @@ using TMPro;
 
 public class Dialogue : MonoBehaviour
 {
-    // accessing json info
-    // public TextAsset textJSON;
+    public Sprite speakerImage;
+    public TextMeshProUGUI speakerTextComponent;
 
-    // [System.Serializable]
-    // public class DialogueClass {
-    //     public int id;
-    //     public string speaker;
-    //     public string message;
-    // }
-
-    // [System.Serializable]
-    // public class DialogueList {
-    //     public DialogueClass[] DialogueLines;
-    // }
-
-    // public DialogueList myDialogueList = new DialogueList();
-    // accessing json info above
-    
     public TextMeshProUGUI textComponent;
-    public string[] Lines; 
+    public List<string> Lines; 
     public float textSpeed;
 
     private int index;
 
     public PlayerController PlayerController_script;
 
-    void Awake() {
-        Lines = new string[] {
-            "Sweno, the Norways' king, craves composition:",
-            "Nor would we deign him burial of his men",
-            "Till he disbursed at Saint Colme's inch",
-            "Ten thousand dollars to our general use."
-        };
-
-    }
+    public JSONReader JSONReader_script;
 
     void Start() {
         gameObject.SetActive(false);
         textComponent.text = string.Empty;
-        // myDialogueList = JsonUtility.FromJson<DialogueList>(textJSON.text);
+        speakerTextComponent.text = string.Empty;
+        accessJSONDialogue();
     }
 
     // Update is called once per frame
@@ -63,6 +41,7 @@ public class Dialogue : MonoBehaviour
 
     public void StartDialogue() {
         index = 0;
+        speakerTextComponent.text = JSONReader_script.currentSpeaker[index];
         StartCoroutine(TypeLine());
     }
 
@@ -74,21 +53,13 @@ public class Dialogue : MonoBehaviour
             yield return new WaitForSeconds(textSpeed);
         }
 
-        // this code is for accessing the json file
-        // textComponent.text = string.Empty;
-        // foreach(DialogueClass dialogue in myDialogueList.DialogueLines) {
-        //     Debug.Log(dialogue.id);
-        //     foreach(char c in dialogue.message.ToCharArray()) {
-        //         textComponent.text += c;
-        //         yield return new WaitForSeconds(textSpeed);
-        //     }
-        // }
     }
 
     void NextLine() {
-        if (index < Lines.Length - 1) {
+        if (index < Lines.Count-1) {
             index++;
             textComponent.text = "";
+            speakerTextComponent.text = JSONReader_script.currentSpeaker[index];
             StartCoroutine(TypeLine());
         } 
         else {
@@ -96,4 +67,14 @@ public class Dialogue : MonoBehaviour
             PlayerController_script.OnEnable();
         }
     }
+
+    void accessJSONDialogue() {
+        JSONReader_script.readJSONFile();
+        Lines = JSONReader_script.MessageLines;
+
+        // speakerTextComponent.text = JSONReader_script.currentSpeaker;
+        
+        // Lines = JSONReader_script.MessageLines;
+    }
+
 }

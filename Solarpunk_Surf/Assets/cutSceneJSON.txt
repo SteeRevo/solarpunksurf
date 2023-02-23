@@ -1,19 +1,20 @@
 {
     "DialogueLines": [
         {
-            "id": 1,
-            "speaker": "JaneDoe",
+            "speaker": "Jane Doe",
             "message": "When shall we three meet again?"
         },
         {
-            "id": 2,
-            "speaker": "JaneDoe",
+            "speaker": "Jane Doe",
             "message": "In thunder, lightning, or in rain?"
         },
         {
-            "id": 3,
-            "speaker": "JaneDoe",
+            "speaker": "John Smith",
             "message": "When the hurlyburly's done, When the battle's lost and won."
+        },
+        {
+            "speaker": "The Solarpunk",
+            "message": "That will be ere the set of sun."
         }
-    ],
+    ]
 }
