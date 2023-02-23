@@ -9,7 +9,7 @@ public class BoostMeterScript : MonoBehaviour
     public int currentVal = 100;
 
     public Slider boostMeterSlider;
-    public Image boostSun;
+    //public Image boostSun;
 
     public WaitForSeconds regenTick = new WaitForSeconds(0.1f);
 
@@ -17,7 +17,7 @@ public class BoostMeterScript : MonoBehaviour
         boostMeterSlider = GetComponent<Slider>();
         Debug.Log(boostMeterSlider.value);
         boostMeterSlider.value = 100; 
-        boostSun.fillAmount = 1;
+        //boostSun.fillAmount = 1;
         Debug.Log(boostMeterSlider.value);
     }
 

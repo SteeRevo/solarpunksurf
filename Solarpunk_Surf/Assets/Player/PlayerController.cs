@@ -26,8 +26,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Slider BoostMeter;
 
-     [SerializeField]
-    private Image BoostSun;
+    // [SerializeField]
+    //private Image BoostSun;
 
     
 
@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        BoostSun.fillAmount = BoostMeter.value/100;
+        //BoostSun.fillAmount = BoostMeter.value/100;
 
 
         if(playerActions.Player.QuickDash.triggered && !overheated)
