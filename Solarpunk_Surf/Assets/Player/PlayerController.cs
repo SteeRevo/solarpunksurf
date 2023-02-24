@@ -45,8 +45,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Rigidbody rb;
 
-    private AudioSource audioSource;
-
     private float moveSpeed;
     
     [SerializeField]
@@ -67,14 +65,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Shader waterShader;
 
-    [SerializeField]
-    private AudioClip jumpSound;
-
-    [SerializeField]
-    private AudioClip landSound;
-
-    [SerializeField]
-    private AudioClip dashSound;
+    private PlayerAudioManager audioManager;
 
     public float turnSmoothTime = 1f;
     float turnSmoothVelocity;
@@ -108,8 +99,9 @@ public class PlayerController : MonoBehaviour
 
     private void Start() {
         _boostMeterScript = BoostMeter.GetComponent<BoostMeterScript>();
-        audioSource = GetComponent<AudioSource>();
         rb.transform.parent = null;
+
+        audioManager = GetComponent<PlayerAudioManager>();
     }
 
     // Update is called once per frame
@@ -120,6 +112,7 @@ public class PlayerController : MonoBehaviour
 
         if(playerActions.Player.QuickDash.triggered && !overheated)
         {
+            audioManager.playDashSound();
             if(moveVector == Vector3.zero)
             {
                 rb.velocity = Vector3.zero;
@@ -137,8 +130,6 @@ public class PlayerController : MonoBehaviour
             {
                 overheated = true;
             }
-
-            audioSource.PlayOneShot(dashSound, 0.5f);
             
         }
         
@@ -162,20 +153,21 @@ public class PlayerController : MonoBehaviour
             var rot = Quaternion.LookRotation(relative, Vector3.up);
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnTorque * Time.deltaTime);
-            
+
             if(!playParticles && isGrounded){
                 ripple.Play();
                 playParticles = true;
 
-                audioSource.Play();
-                audioSource.PlayOneShot(landSound, 0.5f);
+                audioManager.playMoveLoop();
+                //audioSource.Play();
             }
             else if(!isGrounded)
             {
                 ripple.Stop();
                 playParticles = false;
 
-                audioSource.Pause();
+                audioManager.pauseMoveLoop();
+                //audioSource.Pause();
             }
             
            
@@ -186,7 +178,7 @@ public class PlayerController : MonoBehaviour
         else{
             if(playParticles){
                 ripple.Stop();
-                audioSource.Pause();
+                audioManager.pauseMoveLoop();
                 playParticles = false;
             }
             
@@ -243,7 +235,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Jump");
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
 
-            audioSource.PlayOneShot(jumpSound, 0.5f);
+            audioManager.playJumpSound();
         }
         if(rb.velocity.y < 0 && !isGrounded)
         {
@@ -264,7 +256,7 @@ public class PlayerController : MonoBehaviour
         {
             noBoostCounter = 0.0f;
             boostCounter += 1f * Time.deltaTime;
-            Debug.Log("boostCounter: "+ boostCounter);
+            //Debug.Log("boostCounter: "+ boostCounter);
             maxSpeed = 40f;
             moveSpeed = maxSpeed;
             // Debug.Log("Is boosting");
@@ -274,12 +266,14 @@ public class PlayerController : MonoBehaviour
             {
                 overheated = true;
             }
+
+            audioManager.boostMoveLoop();
         }
         else if (!isBoosting && BoostMeter.value > 1 && !overheated) {
-            Debug.Log("!!stopped boosting counter: "+ boostCounter);
+            //Debug.Log("!!stopped boosting counter: "+ boostCounter);
             boostCounter = 0.0f;
             noBoostCounter += 2f * Time.deltaTime;
-            Debug.Log("!!noBoostCounter: "+ noBoostCounter);
+            //Debug.Log("!!noBoostCounter: "+ noBoostCounter);
             if (noBoostCounter > 0.0 && noBoostCounter < 2.0) {
                 _boostMeterScript.Invoke("regenBoostMeter", 2.0f);
             } 
@@ -288,9 +282,11 @@ public class PlayerController : MonoBehaviour
                 //maxSpeed = originalSpeed;
             }
             maxSpeed = originalSpeed;
+            audioManager.restoreMoveLoop();
         } else {
             _boostMeterScript.regenBoostMeter();
             maxSpeed = originalSpeed;
+            audioManager.restoreMoveLoop();
         }
 
     }
