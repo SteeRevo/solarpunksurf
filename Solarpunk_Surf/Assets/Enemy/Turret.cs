@@ -12,15 +12,17 @@ public class Turret : MonoBehaviour
     public Transform firePosition;
     public GameObject projectile;
     public float delay;
+
+    private AudioSource fireSound;
+
     
-    //public AudioSource fireSound;
 
     private float time = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        fireSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -46,7 +48,7 @@ public class Turret : MonoBehaviour
             if (time >= delay)
             {
                 time = time - delay;
-                //fireSound.Play();
+                fireSound.Play();
                 Instantiate(projectile, firePosition.position, transform.rotation);
             }
         }
