@@ -11639,7 +11639,6 @@ MonoBehaviour:
   fallMultiplier: 40
   lowjumpMultiplier: 5
   BoostMeter: {fileID: 1844623504}
-  BoostSun: {fileID: 1684246675}
   _boostMeterScript: {fileID: 0}
   playerCamera: {fileID: 0}
   rb: {fileID: 1921455606}

@@ -12,6 +12,8 @@ public class JSONReader : MonoBehaviour
     public class DialogueClass {
         public string speaker;
         public string message;
+        public string speakerimage;
+
     }
 
     [System.Serializable]
@@ -21,7 +23,7 @@ public class JSONReader : MonoBehaviour
 
     public DialogueList myDialogueList = new DialogueList();
 
-    public  List<string> MessageLines = new List<string>();
+    public  List<string> MessageLines = new List<string>();  
 
     public List<string> currentSpeaker = new List<string>();
     
@@ -29,12 +31,31 @@ public class JSONReader : MonoBehaviour
     void Start()
     {
         myDialogueList = JsonUtility.FromJson<DialogueList>(textJSON.text);
-    }
-
-    public void readJSONFile() {
         foreach(DialogueClass dialogue in myDialogueList.DialogueLines) {
            currentSpeaker.Add(dialogue.speaker);
             MessageLines.Add(dialogue.message);
+            // Debug.Log(dialogue.message);
         }
+    }
+
+    void Update() {
+        
+    }
+
+    // public void readJSONFile() {
+    //     Debug.Log("inside");
+    //     foreach(DialogueClass dialogue in myDialogueList.DialogueLines) {
+    //     //    currentSpeaker.Add(dialogue.speaker);
+    //     //     MessageLines.Add(dialogue.message);
+    //         Debug.Log(dialogue.message);
+    //     }
+    // }
+
+    public List<string> getDialogueMessageList() {
+        return MessageLines;
+    }
+
+     public List<string> getCurrentSpeakerList() {
+        return currentSpeaker;
     }
 }

@@ -2,19 +2,23 @@
     "DialogueLines": [
         {
             "speaker": "Jane Doe",
-            "message": "When shall we three meet again?"
+            "message": "When shall we three meet again?",
+            "speakerimage": "n/a"
         },
         {
             "speaker": "Jane Doe",
-            "message": "In thunder, lightning, or in rain?"
+            "message": "In thunder, lightning, or in rain?",
+            "speakerimage": "n/a"
         },
         {
             "speaker": "John Smith",
-            "message": "When the hurlyburly's done, When the battle's lost and won."
+            "message": "When the hurlyburly's done, When the battle's lost and won.",
+            "speakerimage": "n/a"
         },
         {
             "speaker": "The Solarpunk",
-            "message": "That will be ere the set of sun."
+            "message": "That will be ere the set of sun.",
+            "speakerimage": "n/a"
         }
     ]
 }
