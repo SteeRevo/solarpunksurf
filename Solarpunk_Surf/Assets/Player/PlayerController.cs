@@ -66,6 +66,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Shader waterShader;
+
+    [SerializeField]
+    private GameObject pauseMenuUI;
+
+
+    public static bool gameIsPaused = false;
     
 
     public float turnSmoothTime = 1f;
@@ -184,7 +190,36 @@ public class PlayerController : MonoBehaviour
         {
             overheated = false;
         }
+
+        if(playerActions.UI.Pause.triggered){
+           PauseGame();
+        }
         
+    }
+
+    private void PauseGame()
+    {
+        if(gameIsPaused){
+            Resume();
+        }
+        else
+        {
+            Pause();
+        }
+    }
+
+    private void Pause()
+    {
+        Time.timeScale = 0f;
+        gameIsPaused = true;
+        pauseMenuUI.SetActive(true);
+    }
+
+    private void Resume()
+    {
+        Time.timeScale = 1f;
+        gameIsPaused = false;
+        pauseMenuUI.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -256,7 +291,7 @@ public class PlayerController : MonoBehaviour
             noBoostCounter = 0.0f;
             boostCounter += 1f * Time.deltaTime;
             Debug.Log("boostCounter: "+ boostCounter);
-            maxSpeed = 40f;
+            maxSpeed = 50f;
             moveSpeed = maxSpeed;
             // Debug.Log("Is boosting");
             BoostMeter.value -= 1;
@@ -314,12 +349,14 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("player movement enabled");
         playerActions.Player.Enable();
+        playerActions.UI.Enable();
     }
     
     // changed this from private to public so the dialogue trigger can access
     public void OnDisable() {
         Debug.Log("diabled player movement");
-        playerActions.Player.Disable();    
+        playerActions.Player.Disable();
+        playerActions.UI.Disable();    
     }
 
     
