@@ -38,8 +38,13 @@ public class Projectile : MonoBehaviour
         {
             Debug.Log("player!");
             //Debug.Log(damage);
-            collider.gameObject.GetComponent<PlayerState>().Health -= damage;
-            Destroy(gameObject);
+            if(collider.gameObject.GetComponent<PlayerState>().isInvincible == false)
+            {
+                collider.gameObject.GetComponent<PlayerState>().Health -= damage;
+                Destroy(gameObject);
+                collider.gameObject.GetComponent<PlayerState>().InvinEnabled();
+            }
+                
         }
         if (collider.gameObject.tag == "Building")
         {

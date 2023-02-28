@@ -89,6 +89,8 @@ public class PlayerController : MonoBehaviour
     public float boostCounter = 0.0f;
     public float noBoostCounter = 0.0f;
 
+    
+
     private void Awake()
     {
         playerActions = new InputManager();

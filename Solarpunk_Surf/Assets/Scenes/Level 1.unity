@@ -10451,7 +10451,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b9ce1d55a1b114458c29bb3143b0ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshRender: {fileID: 995909518}
   healthMeter: {fileID: 4859573581370502879}
+  isInvincible: 0
+  invinCoolddown: 3
   maxHealth: 5
 --- !u!54 &1751906108
 Rigidbody:
