@@ -462,7 +462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6718160392674730454, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
       propertyPath: m_Volume
-      value: 0.618
+      value: 0.212
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
@@ -1288,7 +1288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6718160392674730454, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
       propertyPath: m_Volume
-      value: 0.618
+      value: 0.212
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
@@ -1437,7 +1437,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6718160392674730454, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
       propertyPath: m_Volume
-      value: 0.618
+      value: 0.212
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
@@ -1947,7 +1947,7 @@ GameObject:
   - component: {fileID: 542297902}
   - component: {fileID: 542297901}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: bgm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1963,7 +1963,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a92808e5ff436e043bf8eda77fe83e6c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 13387bfcf03d3ee4287ba708932189dd, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -2475,7 +2475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6718160392674730454, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
       propertyPath: m_Volume
-      value: 0.618
+      value: 0.212
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
@@ -3105,7 +3105,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5cfb49fcaab23ed44b23a80bf314d89f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fdb36bd240d4f9f44a8456f15ec22904, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3685,7 +3685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6718160392674730454, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
       propertyPath: m_Volume
-      value: 0.618
+      value: 0.212
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
@@ -5279,7 +5279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6718160392674730454, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
       propertyPath: m_Volume
-      value: 0.618
+      value: 0.212
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
@@ -10388,7 +10388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6718160392674730454, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
       propertyPath: m_Volume
-      value: 0.618
+      value: 0.212
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
@@ -10549,7 +10549,7 @@ MonoBehaviour:
   meshRender: {fileID: 995909518}
   healthMeter: {fileID: 4859573581370502879}
   isInvincible: 0
-  invinCoolddown: 3
+  invinCoolddown: 1
   maxHealth: 5
 --- !u!54 &1751906108
 Rigidbody:
@@ -10973,6 +10973,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6442013436602111749, guid: 44235812543bf2f4fa832cb6502d7542, type: 3}
+      propertyPath: m_Color.b
+      value: 0.048460312
+      objectReference: {fileID: 0}
+    - target: {fileID: 6442013436602111749, guid: 44235812543bf2f4fa832cb6502d7542, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6130904
+      objectReference: {fileID: 0}
+    - target: {fileID: 6442013436602111749, guid: 44235812543bf2f4fa832cb6502d7542, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9339623
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44235812543bf2f4fa832cb6502d7542, type: 3}
 --- !u!1 &1763609275
@@ -11095,7 +11107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6718160392674730454, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
       propertyPath: m_Volume
-      value: 0.618
+      value: 0.212
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
@@ -16094,7 +16106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6718160392674730454, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
       propertyPath: m_Volume
-      value: 0.618
+      value: 0.212
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
@@ -16288,7 +16300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6718160392674730454, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
       propertyPath: m_Volume
-      value: 0.618
+      value: 0.212
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
@@ -16812,7 +16824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6718160392674730454, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
       propertyPath: m_Volume
-      value: 0.618
+      value: 0.212
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
@@ -16871,7 +16883,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.246701
+  orthographic size: 16.589788
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -17480,7 +17492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9245283, g: 0.385262, b: 0.13519046, a: 1}
+  m_Color: {r: 0.19575472, g: 0.7830189, b: 0.26502922, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -17581,7 +17593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 316, y: 136}
+  m_AnchoredPosition: {x: 310, y: 136}
   m_SizeDelta: {x: 250, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4859573581370502877
@@ -17805,7 +17817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6718160392674730454, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
       propertyPath: m_Volume
-      value: 0.618
+      value: 0.212
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dcf7d9c5b4884047a70390692cec104, type: 3}
