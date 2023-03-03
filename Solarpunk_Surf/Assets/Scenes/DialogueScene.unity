@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11752,7 +11752,7 @@ MonoBehaviour:
   Dialogue_script: {fileID: 56574594}
   DialogueBox2: {fileID: 56574590}
   PlayerController_script: {fileID: 1751906102}
-  pauseMenuUI: {fileID: 0}
+  pauseMenuUI: {fileID: 31087563}
 --- !u!1 &1751906101
 GameObject:
   m_ObjectHideFlags: 0

@@ -353,19 +353,34 @@ public class PlayerController : MonoBehaviour
     }*/
 
 
-    public void OnEnable()
+    public void OnMovementEnable()
     {
         Debug.Log("player movement enabled");
         playerActions.Player.Enable();
-        playerActions.UI.Enable();
+        
     }
+     public void OnUIEnable()
+    {
+        Debug.Log("player UI enabled");
+        playerActions.UI.Enable();
+        
+    }
+
     
     // changed this from private to public so the dialogue trigger can access
-    public void OnDisable() {
+    public void OnMovementDisable() {
         Debug.Log("diabled player movement");
         playerActions.Player.Disable();
-        playerActions.UI.Disable();    
+         
     }
+
+    public void OnUIDisable() {
+        Debug.Log("diabled player UI");
+        playerActions.UI.Disable();
+         
+    }
+
+
 
     
 }
