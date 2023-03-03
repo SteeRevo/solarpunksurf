@@ -36,7 +36,7 @@ public class DialogueTrigger : MonoBehaviour
             // PauseMenu_script.Pause();
             // playerActions.UI.Disable();
             Pause();
-            PlayerController_script.OnDisable();
+            // PlayerController_script.OnDisable();
 
             DialogueBox2.SetActive(true);
             Dialogue_script.StartDialogue();

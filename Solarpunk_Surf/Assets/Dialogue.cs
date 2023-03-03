@@ -93,7 +93,7 @@ public class Dialogue : MonoBehaviour
         textComponent.text = string.Empty;
         foreach(char c in Lines[dialogueIndex].ToCharArray()) {
             textComponent.text += c;
-            yield return new WaitForSeconds(textSpeed);
+            yield return new WaitForSecondsRealtime(textSpeed);
         }
 
     }
