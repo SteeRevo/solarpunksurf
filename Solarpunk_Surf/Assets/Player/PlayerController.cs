@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
         else{
             if(playParticles){
                 ripple.Stop();
-                audioManager.pauseMoveLoop();
+                // audioManager.pauseMoveLoop();
                 playParticles = false;
             }
             
@@ -320,7 +320,7 @@ public class PlayerController : MonoBehaviour
                 //maxSpeed = originalSpeed;
             }
             maxSpeed = originalSpeed;
-            audioManager.restoreMoveLoop();
+            // audioManager.restoreMoveLoop();
         } else {
             _boostMeterScript.regenBoostMeter();
             maxSpeed = originalSpeed;

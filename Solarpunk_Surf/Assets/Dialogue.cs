@@ -19,6 +19,15 @@ public class Dialogue : MonoBehaviour
 
     public PlayerController PlayerController_script;
 
+    private InputManager playerActions;
+
+    [SerializeField]
+    private GameObject pauseMenuUI;
+
+    public static bool gameIsPaused = false;
+
+    // public PauseMenu PauseMenu_script;
+
     public JSONReader JSONReader_script;
 
     // public string[] messageDialogueLines;
@@ -98,8 +107,26 @@ public class Dialogue : MonoBehaviour
         } 
         else {
             gameObject.SetActive(false);
-            PlayerController_script.OnEnable();
+            Resume();
+            // PauseMenu_script.Resume();
+            // playerActions.UI.Enable();
+            // PlayerController_script.OnEnable();
         }
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+        gameIsPaused = true;
+        pauseMenuUI.SetActive(true);
+    }
+
+    //
+    public void Resume()
+    {
+        Time.timeScale = 1f;
+        gameIsPaused = false;
+        pauseMenuUI.SetActive(false);
     }
 
 }

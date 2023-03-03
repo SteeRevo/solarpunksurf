@@ -9,6 +9,13 @@ public class DialogueTrigger : MonoBehaviour
     // public GameObject PlayerController;
     private InputManager playerActions;
     public PlayerController PlayerController_script;
+
+    [SerializeField]
+    private GameObject pauseMenuUI;
+
+    public static bool gameIsPaused = false;
+    // public PauseMenu PauseMenu_script;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,11 +32,31 @@ public class DialogueTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider col) {
         if (col.tag == "Player") {
             Debug.Log("Collision detected");
+
+            // PauseMenu_script.Pause();
+            // playerActions.UI.Disable();
+            Pause();
             PlayerController_script.OnDisable();
+
             DialogueBox2.SetActive(true);
             Dialogue_script.StartDialogue();
             // Dialogue_script.DialogueSystem();
         }
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+        gameIsPaused = true;
+        pauseMenuUI.SetActive(true);
+    }
+
+    //
+    public void Resume()
+    {
+        Time.timeScale = 1f;
+        gameIsPaused = false;
+        pauseMenuUI.SetActive(false);
     }
 
     // private void OnTriggerExit(Collider col) {
