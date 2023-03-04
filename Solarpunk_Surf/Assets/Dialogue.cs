@@ -127,6 +127,7 @@ public class Dialogue : MonoBehaviour
         Time.timeScale = 1f;
         gameIsPaused = false;
         pauseMenuUI.SetActive(false);
+        Destroy(this);
     }
 
 }

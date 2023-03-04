@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
         else{
             if(playParticles){
                 ripple.Stop();
-                // audioManager.pauseMoveLoop();
+                audioManager.pauseMoveLoop();
                 playParticles = false;
             }
             

@@ -41,6 +41,7 @@ public class DialogueTrigger : MonoBehaviour
             DialogueBox2.SetActive(true);
             Dialogue_script.StartDialogue();
             // Dialogue_script.DialogueSystem();
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -59,9 +60,9 @@ public class DialogueTrigger : MonoBehaviour
         pauseMenuUI.SetActive(false);
     }
 
-    // private void OnTriggerExit(Collider col) {
-    //     // PlayerController_script.OnEnable();
-    //     DialogueBox2.SetActive(false);
-    // }
+     //private void OnTriggerExit(Collider col) {
+       // PlayerController_script.OnEnable();
+        //DialogueBox2.SetActive(false);
+     //}
 
 }
