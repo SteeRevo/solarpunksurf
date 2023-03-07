@@ -51,6 +51,8 @@ public class Dialogue : MonoBehaviour
         //     Lines.Add(i);
         //     Debug.Log("it is work"+i);
         // }
+
+        playerActions = new InputManager();
     }
     void Start() {
         gameObject.SetActive(false);
@@ -71,7 +73,7 @@ public class Dialogue : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetMouseButtonDown(0)) {
+        if (playerActions.Player.Jump.triggered) {
             if (textComponent.text == Lines[dialogueIndex]) {
                 NextLine();
             }
@@ -128,6 +130,20 @@ public class Dialogue : MonoBehaviour
         gameIsPaused = false;
         pauseMenuUI.SetActive(false);
         Destroy(this);
+    }
+
+    public void OnEnable()
+    {
+        Debug.Log("player movement enabled");
+        playerActions.Player.Enable();
+        // playerActions.UI.Enable();
+    }
+    
+    // changed this from private to public so the dialogue trigger can access
+    public void OnDisable() {
+        Debug.Log("diabled player movement");
+        playerActions.Player.Disable();
+        // playerActions.UI.Disable();    
     }
 
 }

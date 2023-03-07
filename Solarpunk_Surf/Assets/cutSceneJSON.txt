@@ -7,7 +7,17 @@
         },
         {
             "speaker": "???",
-            "message": "I told you before, just find the big floating gear and bring it to me.",
+            "message": "I told you before, just find the yellow sphere and bring it to me.",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "The Solar Punk",
+            "message": "Sphere? It's not a piece of tech or something?",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "???",
+            "message": "The developers haven't had time to 3D model. Just roll with it",
             "speakerimage": "n/a"
         },
         {
