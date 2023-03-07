@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Talk",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "7b56edf4-a0a2-48d3-b9b4-daf4c92a90ff",
                     "expectedControlType": "Button",
@@ -187,11 +187,22 @@
                 {
                     "name": "",
                     "id": "8cd51964-97a3-4685-a4c1-6fbee4fafca0",
-                    "path": "<Keyboard>/upArrow",
+                    "path": "<Keyboard>/k",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Talk",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "90d03367-1255-478a-9638-29f033fc4324",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -17,31 +17,33 @@ public class DialogueButtonPrompt : MonoBehaviour
 
     private bool inRange = false;
 
-    private bool talkInput;
-
-    private InputManager playerActions;
-
     
     // Start is called before the first frame update
     private void Awake()
     {
-        playerActions = new InputManager();
-
-        playerActions.Player.Talk.performed += _ => talkInput = true;
-        playerActions.Player.Talk.canceled += _ => talkInput = false;
         buttonPrompt.SetActive(false);
         pauseMenuUI.SetActive(false);
     }
 
-    void Update()
+    private void Action()
     {
-        if (talkInput)
+        if (inRange)
         {
-            Debug.Log("triggered dialogue");
             Pause();
             dialogueBox.gameObject.SetActive(true);
             dialogueBox.StartDialogue();
         }
+
+    }
+
+    private void OnEnable()
+    {
+        PlayerController.OnInteract += Action;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.OnInteract -= Action;
     }
 
     private void OnTriggerEnter(Collider col)

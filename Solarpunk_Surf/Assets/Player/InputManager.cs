@@ -64,7 +64,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Talk"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""7b56edf4-a0a2-48d3-b9b4-daf4c92a90ff"",
                     ""expectedControlType"": ""Button"",
@@ -209,11 +209,22 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8cd51964-97a3-4685-a4c1-6fbee4fafca0"",
-                    ""path"": ""<Keyboard>/upArrow"",
+                    ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Talk"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""90d03367-1255-478a-9638-29f033fc4324"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -298,7 +309,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
         m_Player_QuickDash = m_Player.FindAction("QuickDash", throwIfNotFound: true);
-        m_Player_Talk = m_Player.FindAction("Talk", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
@@ -366,7 +377,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Boost;
     private readonly InputAction m_Player_QuickDash;
-    private readonly InputAction m_Player_Talk;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @InputManager m_Wrapper;
@@ -375,7 +386,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Boost => m_Wrapper.m_Player_Boost;
         public InputAction @QuickDash => m_Wrapper.m_Player_QuickDash;
-        public InputAction @Talk => m_Wrapper.m_Player_Talk;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -397,9 +408,9 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 @QuickDash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickDash;
                 @QuickDash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickDash;
                 @QuickDash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickDash;
-                @Talk.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTalk;
-                @Talk.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTalk;
-                @Talk.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTalk;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -416,9 +427,9 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 @QuickDash.started += instance.OnQuickDash;
                 @QuickDash.performed += instance.OnQuickDash;
                 @QuickDash.canceled += instance.OnQuickDash;
-                @Talk.started += instance.OnTalk;
-                @Talk.performed += instance.OnTalk;
-                @Talk.canceled += instance.OnTalk;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -470,7 +481,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
         void OnQuickDash(InputAction.CallbackContext context);
-        void OnTalk(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
