@@ -89,7 +89,8 @@ public class PlayerController : MonoBehaviour
     public float boostCounter = 0.0f;
     public float noBoostCounter = 0.0f;
 
-    
+    public delegate void InteractAction();
+    public static event InteractAction OnInteract;
 
     private void Awake()
     {
@@ -100,6 +101,7 @@ public class PlayerController : MonoBehaviour
         playerActions.Player.Jump.canceled += _ => jumpInput = false;
         playerActions.Player.Boost.performed += _ => isBoosting = true;
         playerActions.Player.Boost.canceled += _ => isBoosting = false;
+        playerActions.Player.Interact.performed += _ => OnInteract();
     
         originalSpeed = maxSpeed;
         defaultTurnTorque = turnTorque;
