@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     //** **//
 
-    private InputManager playerActions;
+    public InputManager playerActions;
 
     [SerializeField]
     private Camera playerCamera;
@@ -65,11 +65,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Shader waterShader;
 
-    [SerializeField]
-    private GameObject pauseMenuUI;
-
-
-    public static bool gameIsPaused = false;
     
     private PlayerAudioManager audioManager;
 
@@ -88,6 +83,8 @@ public class PlayerController : MonoBehaviour
 
     public float boostCounter = 0.0f;
     public float noBoostCounter = 0.0f;
+
+    private bool inPause = false;
 
     public delegate void InteractAction();
     public static event InteractAction OnInteract;
@@ -121,7 +118,7 @@ public class PlayerController : MonoBehaviour
         //BoostSun.fillAmount = BoostMeter.value/100;
 
 
-        if(playerActions.Player.QuickDash.triggered && !overheated)
+        if(playerActions.Player.QuickDash.triggered && !overheated && !inPause)
         {
             audioManager.playDashSound();
             if(moveVector == Vector3.zero)
@@ -156,7 +153,7 @@ public class PlayerController : MonoBehaviour
         //ripple.transform.position = ripplePlacement;
 
 
-        if(moveVector != Vector3.zero)
+        if(moveVector != Vector3.zero && !inPause)
         {
            
 
@@ -203,36 +200,11 @@ public class PlayerController : MonoBehaviour
             overheated = false;
         }
 
-        if(playerActions.UI.Pause.triggered){
-           PauseGame();
-        }
+        
         
     }
 
-    private void PauseGame()
-    {
-        if(gameIsPaused){
-            Resume();
-        }
-        else
-        {
-            Pause();
-        }
-    }
-
-    private void Pause()
-    {
-        Time.timeScale = 0f;
-        gameIsPaused = true;
-        pauseMenuUI.SetActive(true);
-    }
-
-    private void Resume()
-    {
-        Time.timeScale = 1f;
-        gameIsPaused = false;
-        pauseMenuUI.SetActive(false);
-    }
+    
 
     private void FixedUpdate()
     {
@@ -270,7 +242,7 @@ public class PlayerController : MonoBehaviour
     void Jump(bool isGrounded)
     {
        
-        if(isGrounded && jumpInput)
+        if(isGrounded && jumpInput && !inPause)
         {
             Debug.Log("Jump");
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
@@ -297,10 +269,10 @@ public class PlayerController : MonoBehaviour
             noBoostCounter = 0.0f;
             boostCounter += 1f * Time.deltaTime;
             Debug.Log("boostCounter: "+ boostCounter);
-            maxSpeed = 50f;
+            maxSpeed = 80f;
             moveSpeed = maxSpeed;
             // Debug.Log("Is boosting");
-            BoostMeter.value -= 1;
+            BoostMeter.value -= 0.5f;
             // Debug.Log("inside player boost,"+ BoostMeter.value);
             if(BoostMeter.value <= 1)
             {
@@ -385,6 +357,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("player movement enabled");
         playerActions.Player.Enable();
+        inPause = false;
         // playerActions.UI.Enable();
     }
     
@@ -392,7 +365,9 @@ public class PlayerController : MonoBehaviour
     public void OnDisable() {
         Debug.Log("diabled player movement");
         playerActions.Player.Disable();
-        // playerActions.UI.Disable();    
+        // playerActions.UI.Disable(); 
+        inPause = true;  
+        Debug.Log("In pause is true");
     }
 
 

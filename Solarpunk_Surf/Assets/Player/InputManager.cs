@@ -251,6 +251,24 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""591a7fc4-1d0c-4267-87cb-aa7389175985"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""dcce41c8-b2a7-4bc8-8d15-7175b2aea746"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -297,6 +315,72 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                     ""action"": ""AdvanceText"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Gamepad"",
+                    ""id"": ""ec36f76e-b449-4b8f-9e5f-165b0897cb29"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""025b3990-a11c-481d-8540-a43b595b28d4"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""3741e12d-f0c1-40c5-8afb-cb091255edc1"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""5422766c-8ae2-4dd1-8b84-1793c51a5980"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""e6150a07-3a8a-4524-be9b-d9024b36cd26"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f55bc760-bb04-4a12-8d58-c6395d4d3b62"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -314,6 +398,8 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
         m_UI_AdvanceText = m_UI.FindAction("AdvanceText", throwIfNotFound: true);
+        m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
+        m_UI_Select = m_UI.FindAction("Select", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -440,12 +526,16 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
     private IUIActions m_UIActionsCallbackInterface;
     private readonly InputAction m_UI_Pause;
     private readonly InputAction m_UI_AdvanceText;
+    private readonly InputAction m_UI_Move;
+    private readonly InputAction m_UI_Select;
     public struct UIActions
     {
         private @InputManager m_Wrapper;
         public UIActions(@InputManager wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause => m_Wrapper.m_UI_Pause;
         public InputAction @AdvanceText => m_Wrapper.m_UI_AdvanceText;
+        public InputAction @Move => m_Wrapper.m_UI_Move;
+        public InputAction @Select => m_Wrapper.m_UI_Select;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -461,6 +551,12 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 @AdvanceText.started -= m_Wrapper.m_UIActionsCallbackInterface.OnAdvanceText;
                 @AdvanceText.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnAdvanceText;
                 @AdvanceText.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnAdvanceText;
+                @Move.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
+                @Select.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSelect;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -471,6 +567,12 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 @AdvanceText.started += instance.OnAdvanceText;
                 @AdvanceText.performed += instance.OnAdvanceText;
                 @AdvanceText.canceled += instance.OnAdvanceText;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
             }
         }
     }
@@ -487,5 +589,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
     {
         void OnPause(InputAction.CallbackContext context);
         void OnAdvanceText(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
     }
 }
