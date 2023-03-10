@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DamageVolume
   - Building
+  - Mines
   layers:
   - Default
   - TransparentFX

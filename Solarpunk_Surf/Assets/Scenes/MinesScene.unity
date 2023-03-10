@@ -18152,9 +18152,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7393560212901353064, guid: a8eccd8baf2e240468ed32652f8d6d7f, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393560212901353064, guid: a8eccd8baf2e240468ed32652f8d6d7f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7393560212901353065, guid: a8eccd8baf2e240468ed32652f8d6d7f, type: 3}
       propertyPath: m_Name
       value: originalMine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393560212901353065, guid: a8eccd8baf2e240468ed32652f8d6d7f, type: 3}
+      propertyPath: m_TagString
+      value: Mines
       objectReference: {fileID: 0}
     - target: {fileID: 7393560212901353069, guid: a8eccd8baf2e240468ed32652f8d6d7f, type: 3}
       propertyPath: m_RootOrder
@@ -18166,7 +18178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7393560212901353069, guid: a8eccd8baf2e240468ed32652f8d6d7f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.06
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 7393560212901353069, guid: a8eccd8baf2e240468ed32652f8d6d7f, type: 3}
       propertyPath: m_LocalPosition.z
