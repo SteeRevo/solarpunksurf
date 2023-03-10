@@ -1,23 +1,98 @@
 {
     "DialogueLines": [
         {
-            "speaker": "Jane Doe",
-            "message": "When shall we three meet again?",
+            "speaker": "The Solar Punk",
+            "message": "So, old timer...what's this thing I'm looking for?",
             "speakerimage": "n/a"
         },
         {
-            "speaker": "Jane Doe",
-            "message": "In thunder, lightning, or in rain?",
+            "speaker": "???",
+            "message": "I told you before, just find the yellow sphere and bring it to me.",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "The Solar Punk",
+            "message": "Sphere? It's not a piece of tech or something?",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "???",
+            "message": "The developers haven't had time to 3D model. Just roll with it",
             "speakerimage": "n/a"
         },
         {
-            "speaker": "John Smith",
-            "message": "When the hurlyburly's done, When the battle's lost and won.",
+            "speaker": "???",
+            "message": "Stop asking me questions I've already answered.",
             "speakerimage": "n/a"
         },
         {
-            "speaker": "The Solarpunk",
-            "message": "That will be ere the set of sun.",
+            "speaker": "???",
+            "message": "Scratch that, stop asking me questions at all.",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "The Solar Punk",
+            "message": "Chill out, you can't get too angry at your age.",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "???",
+            "message": "Ugh, I hate kids.",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "???",
+            "message": "I've made some adjustments to your board so listen up!",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "???",
+            "message": "Cuz I'm not repeating myself.",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "???",
+            "message": "Use 'Space' to jump over obstacles in your path.",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "???",
+            "message": "Get yourself a speed boost with 'Left Shift.'",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "???",
+            "message": "And hit 'J' for a quick dash in a pinch.",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "???",
+            "message": "The boost and the dash arent infinite so dont use all your fuel up at once or you'll overheat",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "???",
+            "message": "Finally, use WASD to move around. But I'm sure you already know that considering you made it this far.",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "The Solar Punk",
+            "message": "Course old timer. I told you, I'm the best surfer you've ever seen!",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "???",
+            "message": "We'll see if those turrets shred you to pieces and prove you wrong.",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "The Solar Punk",
+            "message": "The what now?",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "???",
+            "message": "Good luck!",
             "speakerimage": "n/a"
         }
     ]
