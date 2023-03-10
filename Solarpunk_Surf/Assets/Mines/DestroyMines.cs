@@ -5,7 +5,6 @@ using UnityEngine;
 public class DestroyMines : MonoBehaviour
 {
     private bool collideWPlayer = false;
-    private bool collideWOtherMine = false;
 
     // the player has to set off the mines
     // the player has to within range of a mine to trigger the mine
@@ -17,7 +16,6 @@ public class DestroyMines : MonoBehaviour
             collideWPlayer = true;
         }
         if (col.CompareTag("Mines")) {
-            collideWOtherMine = true;
             Debug.Log("yay");
         }
         if (collideWPlayer) {
