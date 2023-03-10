@@ -36,8 +36,6 @@ public class PlayerController : MonoBehaviour
 
     public InputManager playerActions;
 
-    [SerializeField]
-    private Camera playerCamera;
 
     Vector2 currentMovement;
     Vector3 moveVector;
@@ -88,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     public delegate void InteractAction();
     public static event InteractAction OnInteract;
+    private bool isCollected = false;
 
     private void Awake()
     {
@@ -358,6 +357,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("player movement enabled");
         playerActions.Player.Enable();
         inPause = false;
+        Collect.OnCollect += collectItem;
         // playerActions.UI.Enable();
     }
     
@@ -368,8 +368,18 @@ public class PlayerController : MonoBehaviour
         // playerActions.UI.Disable(); 
         inPause = true;  
         Debug.Log("In pause is true");
+        Collect.OnCollect -= collectItem;
     }
 
+    void collectItem()
+    {
+        isCollected = true;
+    }
+
+    public bool checkItem()
+    {
+        return isCollected;
+    }
 
 
     

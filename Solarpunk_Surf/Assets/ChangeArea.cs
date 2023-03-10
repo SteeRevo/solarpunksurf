@@ -6,10 +6,14 @@ using UnityEngine.SceneManagement;
 public class ChangeArea : MonoBehaviour
 {
     public int levelIndex;
+
+    public GameObject Player;
+
+    private PlayerController playerScript;
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerScript = Player.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -21,7 +25,7 @@ public class ChangeArea : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.tag);
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" && playerScript.checkItem())
         {
             SceneManager.LoadScene(levelIndex);
         }
