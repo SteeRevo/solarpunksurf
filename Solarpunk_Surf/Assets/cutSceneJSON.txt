@@ -52,17 +52,17 @@
         },
 	{
             "speaker": "???",
-            "message": "Use 'Space' to jump over obstacles in your path.",
+            "message": "Use 'Space/A Button' to jump over obstacles in your path.",
             "speakerimage": "n/a"
         },
 	{
             "speaker": "???",
-            "message": "Get yourself a speed boost with 'Left Shift.'",
+            "message": "Get yourself a speed boost with 'Left Shift/Right Trigger'",
             "speakerimage": "n/a"
         },
 	{
             "speaker": "???",
-            "message": "And hit 'J' for a quick dash in a pinch.",
+            "message": "And hit 'J/B Button' for a quick dash in a pinch.",
             "speakerimage": "n/a"
         },
 	{
@@ -72,7 +72,7 @@
         },
 	{
             "speaker": "???",
-            "message": "Finally, use WASD to move around. But I'm sure you already know that considering you made it this far.",
+            "message": "Finally, use 'WASD/Left Stick' to move around. But I'm sure you already know that considering you made it this far.",
             "speakerimage": "n/a"
         },
 	{
