@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
     public float boostCounter = 0.0f;
     public float noBoostCounter = 0.0f;
 
-    private bool inPause = false;
+    public bool inPause = false;
 
     public delegate void InteractAction();
     public static event InteractAction OnInteract;
@@ -115,90 +115,95 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //BoostSun.fillAmount = BoostMeter.value/100;
+        if(!inPause){
+            if(playerActions.Player.QuickDash.triggered && !overheated)
+            {
+                audioManager.playDashSound();
+                if(moveVector == Vector3.zero)
+                {
+                    rb.velocity = Vector3.zero;
+                    rb.AddForce(transform.forward * dashForce, ForceMode.VelocityChange);
+                }
+                else
+                {
+                    rb.velocity = Vector3.zero;
+                    rb.AddForce(moveVector * dashForce, ForceMode.VelocityChange);
+                }
+            
+                BoostMeter.value -= 50;
+                
+                if(BoostMeter.value <= 0)
+                {
+                    overheated = true;
+                }
+                
+            }
+            
+            
+            currentMovement = playerActions.Player.Move.ReadValue<Vector2>();
+            moveVector = new Vector3(currentMovement.x, 0, currentMovement.y).normalized;
+            transform.position = rb.transform.position;
+
+            var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, -45, 0));
+            moveVector = matrix.MultiplyPoint3x4(moveVector);
+
+            //Vector3 ripplePlacement = new Vector3(transform.position.x+0.5f, transform.position.y, transform.position.z - 1);
+            //ripple.transform.position = ripplePlacement;
 
 
-        if(playerActions.Player.QuickDash.triggered && !overheated && !inPause)
-        {
-            audioManager.playDashSound();
-            if(moveVector == Vector3.zero)
+            if(moveVector != Vector3.zero)
             {
-                rb.velocity = Vector3.zero;
-                rb.AddForce(transform.forward * dashForce, ForceMode.VelocityChange);
-            }
-            else
-            {
-                rb.velocity = Vector3.zero;
-                rb.AddForce(moveVector * dashForce, ForceMode.VelocityChange);
-            }
-           
-            BoostMeter.value -= 25;
             
-            if(BoostMeter.value <= 0)
-            {
-                overheated = true;
-            }
+
+                var relative = (transform.position + moveVector) - transform.position;
+                var rot = Quaternion.LookRotation(relative, Vector3.up);
+
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnTorque * Time.deltaTime);
+
+                if(!playParticles && isGrounded){
+                    ripple.Play();
+                    playParticles = true;
+
+                    audioManager.playMoveLoop();
+                    //audioSource.Play();
+                }
+                else if(!isGrounded)
+                {
+                    ripple.Stop();
+                    playParticles = false;
+
+                    audioManager.pauseMoveLoop();
+                    //audioSource.Pause();
+                }
+                
             
-        }
+
+                
         
+            }
+            else{
+                if(playParticles){
+                    ripple.Stop();
+                    audioManager.pauseMoveLoop();
+                    playParticles = false;
+                }
+                
+            }
+            
+            
         
-        currentMovement = playerActions.Player.Move.ReadValue<Vector2>();
-        moveVector = new Vector3(currentMovement.x, 0, currentMovement.y).normalized;
-        transform.position = rb.transform.position;
 
-        var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, -45, 0));
-        moveVector = matrix.MultiplyPoint3x4(moveVector);
-
-        //Vector3 ripplePlacement = new Vector3(transform.position.x+0.5f, transform.position.y, transform.position.z - 1);
-        //ripple.transform.position = ripplePlacement;
-
-
-        if(moveVector != Vector3.zero && !inPause)
-        {
-           
-
-            var relative = (transform.position + moveVector) - transform.position;
-            var rot = Quaternion.LookRotation(relative, Vector3.up);
-
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnTorque * Time.deltaTime);
-
-            if(!playParticles && isGrounded){
-                ripple.Play();
-                playParticles = true;
-
-                audioManager.playMoveLoop();
-                //audioSource.Play();
-            }
-            else if(!isGrounded)
+            if(overheated && BoostMeter.value == 100)
             {
-                ripple.Stop();
-                playParticles = false;
-
-                audioManager.pauseMoveLoop();
-                //audioSource.Pause();
+                overheated = false;
             }
-            
-           
 
-            
-    
         }
         else{
-            if(playParticles){
-                ripple.Stop();
-                audioManager.pauseMoveLoop();
-                playParticles = false;
-            }
-            
+            audioManager.pauseMoveLoop();
+            return;
         }
         
-        
-       
-
-        if(overheated && BoostMeter.value == 100)
-        {
-            overheated = false;
-        }
-
         
         
     }
@@ -356,8 +361,9 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("player movement enabled");
         playerActions.Player.Enable();
-        inPause = false;
         Collect.OnCollect += collectItem;
+        Menu_Controls.OnPause += changePause;
+        //OnPause.playerPause += changePause;
         // playerActions.UI.Enable();
     }
     
@@ -369,6 +375,14 @@ public class PlayerController : MonoBehaviour
         inPause = true;  
         Debug.Log("In pause is true");
         Collect.OnCollect -= collectItem;
+        Menu_Controls.OnPause -= changePause;
+        //OnPause.playerPause -= changePause;
+    }
+
+    public void changePause()
+    {
+        inPause = !inPause;
+        Debug.Log("Here is pause: " + inPause);
     }
 
     void collectItem()

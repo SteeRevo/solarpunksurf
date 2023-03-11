@@ -42,6 +42,7 @@ public class DialogueTrigger : MonoBehaviour
             Dialogue_script.StartDialogue();
             // Dialogue_script.DialogueSystem();
             this.gameObject.SetActive(false);
+            
         }
     }
 
@@ -49,7 +50,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         Time.timeScale = 0f;
         gameIsPaused = true;
-        pauseMenuUI.SetActive(true);
+        
     }
 
     //
@@ -57,7 +58,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         Time.timeScale = 1f;
         gameIsPaused = false;
-        pauseMenuUI.SetActive(false);
+        
     }
 
      //private void OnTriggerExit(Collider col) {

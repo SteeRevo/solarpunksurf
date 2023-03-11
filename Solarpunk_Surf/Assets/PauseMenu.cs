@@ -16,8 +16,18 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     private GameObject pauseMenuUI;
 
+    [SerializeField]
+    private GameObject boostMeter;
+
+    [SerializeField]
+    private GameObject healthMeter;
+
     public GameObject playerScript;
-    private PlayerController playerControllerScript; 
+    private PlayerController playerControllerScript;
+
+    private bool _inDialogue = false;
+
+    
 
 
     // Start is called before the first frame update
@@ -36,7 +46,7 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
         if(playerActions.UI.Pause.triggered){
-            playerControllerScript.OnDisable();
+            
             PauseGame();
         }
     }
@@ -44,6 +54,7 @@ public class PauseMenu : MonoBehaviour
     private void PauseGame()
     {
         if(gameIsPaused){
+           
             Resume();
         }
         else
@@ -58,6 +69,8 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         gameIsPaused = true;
         pauseMenuUI.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(resumeGameButton);
     }
 
     //
@@ -65,9 +78,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         gameIsPaused = false;
-        
         pauseMenuUI.SetActive(false);
-        playerControllerScript.OnEnable();
         
     }
 
@@ -76,17 +87,24 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
     }
 
+    private void checkDialogue()
+    {
+       Debug.Log("in dialogue");
+    }
+
 
 
     public void OnEnable()
     {
         Debug.Log("player movement enabled");
         playerActions.UI.Enable();
+        Dialogue.inDialogue += checkDialogue;
     }
     
     // changed this from private to public so the dialogue trigger can access
     public void OnDisable() {
         Debug.Log("diabled player movement");
         playerActions.UI.Disable();    
+        Dialogue.inDialogue -= checkDialogue;
     }
 }

@@ -11,6 +11,9 @@ public class Menu_Controls : MonoBehaviour
 
     public static bool gameIsPaused = false;
 
+    public delegate void PauseController();
+    public static event PauseController OnPause;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -22,15 +25,17 @@ public class Menu_Controls : MonoBehaviour
     {
         if(playerActions.UI.Pause.triggered){
             Debug.Log("Pause");
-           PauseGame();
+            PauseGame();
         }
     }
 
 
     private void PauseGame()
     {
-        if(gameIsPaused){
+        if(gameIsPaused)
+        {
             Resume();
+            
         }
         else
         {
@@ -38,15 +43,17 @@ public class Menu_Controls : MonoBehaviour
         }
     }
 
-    private void Pause()
+    public void Pause()
     {
+        OnPause();
         Time.timeScale = 0f;
         gameIsPaused = true;
         pauseMenuUI.SetActive(true);
     }
 
-    private void Resume()
+    public void Resume()
     {
+        OnPause();
         Time.timeScale = 1f;
         gameIsPaused = false;
         pauseMenuUI.SetActive(false);
@@ -58,12 +65,14 @@ public class Menu_Controls : MonoBehaviour
         Debug.Log("player movement enabled");
         playerActions.UI.Enable();
         // playerActions.UI.Enable();
+        //Dialogue.inDialogue += checkDialogue;
     }
     
     // changed this from private to public so the dialogue trigger can access
     public void OnDisable() {
         Debug.Log("diabled player movement");
         playerActions.UI.Disable();
+        //Dialogue.inDialogue -= checkDialogue;
         // player
     }
 }

@@ -32,6 +32,9 @@ public class Dialogue : MonoBehaviour
 
     // public string[] messageDialogueLines;
 
+    public delegate void CutsceneEvent();
+    public static event CutsceneEvent inDialogue;
+
     public void Awake() {
         // foreach (string i in JSONReader_script.MessageLines) {
         //     Lines.Add(i);
@@ -87,6 +90,7 @@ public class Dialogue : MonoBehaviour
     public void StartDialogue() {
         dialogueIndex = 0;
         speakerTextComponent.text = currentSpeakerList[dialogueIndex];
+        
         StartCoroutine(TypeLine());
     }
 
@@ -120,7 +124,7 @@ public class Dialogue : MonoBehaviour
     {
         Time.timeScale = 0f;
         gameIsPaused = true;
-        pauseMenuUI.SetActive(true);
+        //pauseMenuUI.SetActive(true);
     }
 
     //
@@ -128,8 +132,8 @@ public class Dialogue : MonoBehaviour
     {
         Time.timeScale = 1f;
         gameIsPaused = false;
-        pauseMenuUI.SetActive(false);
-        Destroy(this);
+        //pauseMenuUI.SetActive(false);
+        
     }
 
     public void OnEnable()
