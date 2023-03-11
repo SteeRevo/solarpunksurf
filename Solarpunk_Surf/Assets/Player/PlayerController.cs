@@ -83,10 +83,12 @@ public class PlayerController : MonoBehaviour
     public float noBoostCounter = 0.0f;
 
     public bool inPause = false;
+    private bool inConvo = false;
 
     public delegate void InteractAction();
     public static event InteractAction OnInteract;
     private bool isCollected = false;
+    private bool canJumpPause = false;
 
     private void Awake()
     {
@@ -118,8 +120,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //BoostSun.fillAmount = BoostMeter.value/100;
-        if(!inPause){
+        if(!inPause && !inConvo){
             if(playerActions.Player.QuickDash.triggered && !overheated)
             {
                 audioManager.playDashSound();
@@ -133,7 +134,9 @@ public class PlayerController : MonoBehaviour
                     rb.velocity = Vector3.zero;
                     rb.AddForce(moveVector * dashForce, ForceMode.VelocityChange);
                 }
-            
+                BoostMeter.value -= 50;
+            }
+
             if(BoostMeter.value <= 0)
             {
                 overheated = true;
@@ -182,6 +185,7 @@ public class PlayerController : MonoBehaviour
                 
         
             }
+
             else{
                 if(playParticles){
                     ripple.Stop();
@@ -197,8 +201,13 @@ public class PlayerController : MonoBehaviour
             if(overheated && BoostMeter.value == 100)
             {
                 overheated = false;
+                 _boostMeterScript.showOverheated(overheated);
             }
 
+            
+
+            
+       
         }
         else{
             audioManager.pauseMoveLoop();
@@ -206,14 +215,7 @@ public class PlayerController : MonoBehaviour
         }
         
         
-       
-
-        if(overheated && BoostMeter.value == 100)
-        {
-            overheated = false;
-            _boostMeterScript.showOverheated(overheated);
-        }
-
+    
         
         
     }
@@ -223,11 +225,17 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = Physics.CheckSphere(moveSphere.position, groundDistance, groundMask);
+        if(!inPause && !inConvo)
+        {
+            Jump(isGrounded);
+                            
+            Boost();
+            
+        }
+        
 
 
-        Jump(isGrounded);
-
-        Boost();
+       
 
 
 
@@ -256,7 +264,7 @@ public class PlayerController : MonoBehaviour
     void Jump(bool isGrounded)
     {
        
-        if(isGrounded && jumpInput && !inPause)
+        if(isGrounded && jumpInput)
         {
             Debug.Log("Jump");
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
@@ -317,29 +325,16 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
     public IEnumerator waitTimer() {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForEndOfFrame();
+        
     }
 
     // public void regenBoostMeter() {
     //     _boostMeterScript.boostMeterSlider.value += 10 * Time.deltaTime;
     //     _boostMeterScript.boostMeterSlider.value = Mathf.Clamp(_boostMeterScript.boostMeterSlider.value, 0, 100);
     // }
-
-    /*
-    private void createRipple(int start, int end, int delta, float speed, float size, float lifetime)
-    {
-        Vector3 forward = ripple.transform.eulerAngles;
-        forward.y = start;
-        ripple.transform.eulerAngles = forward;
-        Color32 color = new Color(0.5f, 1f, 1f, 1f);
-        
-        for(int i = 0; i < end; i+=delta)
-        {
-            ripple.Emit(transform.position + ripple.transform.forward * 0.5f, ripple.transform.forward * speed, size, lifetime, color);
-            ripple.transform.eulerAngles += Vector3.up * 3;
-        }
-    }*/
 
 
     // public void OnMovementEnable()
@@ -374,8 +369,8 @@ public class PlayerController : MonoBehaviour
         playerActions.Player.Enable();
         Collect.OnCollect += collectItem;
         Menu_Controls.OnPause += changePause;
-        //OnPause.playerPause += changePause;
-        // playerActions.UI.Enable();
+        Dialogue.inDialogue += changeDialogue;
+        
     }
     
     // changed this from private to public so the dialogue trigger can access
@@ -387,13 +382,24 @@ public class PlayerController : MonoBehaviour
         Debug.Log("In pause is true");
         Collect.OnCollect -= collectItem;
         Menu_Controls.OnPause -= changePause;
-        //OnPause.playerPause -= changePause;
+        Dialogue.inDialogue -= changeDialogue;
+        
     }
+
+    
 
     public void changePause()
     {
         inPause = !inPause;
         Debug.Log("Here is pause: " + inPause);
+        
+    }
+
+    public void changeDialogue()
+    {
+        inConvo = !inConvo;
+        Debug.Log("Here is pause: " + inPause);
+        
     }
 
     void collectItem()

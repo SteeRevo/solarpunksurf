@@ -34,6 +34,7 @@ public class Dialogue : MonoBehaviour
 
     public delegate void CutsceneEvent();
     public static event CutsceneEvent inDialogue;
+    private bool inPause = false;
 
     public void Awake() {
         // foreach (string i in JSONReader_script.MessageLines) {
@@ -76,21 +77,24 @@ public class Dialogue : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (playerActions.Player.Jump.triggered) {
-            if (textComponent.text == Lines[dialogueIndex]) {
-                NextLine();
-            }
-            else {
-                StopAllCoroutines();
-                textComponent.text = Lines[dialogueIndex];
+        if(!inPause){
+            if (playerActions.UI.Select.triggered) {
+                if (textComponent.text == Lines[dialogueIndex]) {
+                    NextLine();
+                }
+                else {
+                    StopAllCoroutines();
+                    textComponent.text = Lines[dialogueIndex];
+                }
             }
         }
+        
     }
 
     public void StartDialogue() {
         dialogueIndex = 0;
         speakerTextComponent.text = currentSpeakerList[dialogueIndex];
-        
+        inDialogue();
         StartCoroutine(TypeLine());
     }
 
@@ -112,6 +116,7 @@ public class Dialogue : MonoBehaviour
             StartCoroutine(TypeLine());
         } 
         else {
+            inDialogue();
             gameObject.SetActive(false);
             Resume();
             // PauseMenu_script.Resume();
@@ -136,18 +141,25 @@ public class Dialogue : MonoBehaviour
         
     }
 
+    private void changePause()
+    {
+        inPause = !inPause;
+    }
+
     public void OnEnable()
     {
         Debug.Log("player movement enabled");
         playerActions.Player.Enable();
-        // playerActions.UI.Enable();
+        playerActions.UI.Enable();
+        Menu_Controls.OnPause += changePause;
     }
     
     // changed this from private to public so the dialogue trigger can access
     public void OnDisable() {
         Debug.Log("diabled player movement");
         playerActions.Player.Disable();
-        // playerActions.UI.Disable();    
+        playerActions.UI.Disable();    
+        Menu_Controls.OnPause -= changePause;
     }
 
 }
