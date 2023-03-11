@@ -11,16 +11,27 @@ public class BoostMeterScript : MonoBehaviour
     public Slider boostMeterSlider;
     //public Image boostSun;
 
+    [SerializeField]
+    private Image boostMeterFill;
+    private Color baseColor;
+
+    [SerializeField]
+    private Image overheatedImg;
+
+    [SerializeField]
+    private Color overheatedColor;
+
     public WaitForSeconds regenTick = new WaitForSeconds(0.1f);
 
     private void Awake() {
         boostMeterSlider = GetComponent<Slider>();
-        Debug.Log(boostMeterSlider.value);
-        boostMeterSlider.value = 100; 
+        //Debug.Log(boostMeterSlider.value);
+        boostMeterSlider.value = 100;
         //boostSun.fillAmount = 1;
-        Debug.Log(boostMeterSlider.value);
+        //Debug.Log(boostMeterSlider.value);
+        baseColor = boostMeterFill.color;
+        overheatedImg.enabled = false;
     }
-
 
     public void regenBoostMeter() {
         boostMeterSlider.value += 20 * Time.deltaTime;
@@ -29,6 +40,18 @@ public class BoostMeterScript : MonoBehaviour
         //boostSun.fillAmount = Mathf.Clamp(boostMeterSlider.value/100, 0, maxMeterVal/100);
     }
 
+    public void showOverheated(bool overheated)
+    {
+        if (overheated)
+        {
+            boostMeterFill.color = Color.red;
+            overheatedImg.enabled = true;
+        } else
+        {
+            boostMeterFill.color = baseColor;
+            overheatedImg.enabled = false;
+        }
+    }
 
 
 }

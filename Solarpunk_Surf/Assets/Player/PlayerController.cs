@@ -109,6 +109,10 @@ public class PlayerController : MonoBehaviour
         rb.transform.parent = null;
 
         audioManager = GetComponent<PlayerAudioManager>();
+
+        overheated = false;
+        // tried to do this with a setter it crashed game so idk
+        _boostMeterScript.showOverheated(overheated);
     }
 
     // Update is called once per frame
@@ -136,6 +140,7 @@ public class PlayerController : MonoBehaviour
             if(BoostMeter.value <= 0)
             {
                 overheated = true;
+                _boostMeterScript.showOverheated(overheated);
             }
             
         }
@@ -197,6 +202,7 @@ public class PlayerController : MonoBehaviour
         if(overheated && BoostMeter.value == 100)
         {
             overheated = false;
+            _boostMeterScript.showOverheated(overheated);
         }
 
         
@@ -276,6 +282,7 @@ public class PlayerController : MonoBehaviour
             if(BoostMeter.value <= 1)
             {
                 overheated = true;
+                _boostMeterScript.showOverheated(overheated);
             }
 
             audioManager.boostMoveLoop();

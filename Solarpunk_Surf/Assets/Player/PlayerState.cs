@@ -8,7 +8,7 @@ public class PlayerState : MonoBehaviour
     [SerializeField]
     private MeshRenderer meshRender;
     
-    Color origColor;
+    private Color origColor;
   
     [SerializeField]
     private Slider healthMeter;
