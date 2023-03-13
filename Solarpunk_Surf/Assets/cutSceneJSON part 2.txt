@@ -1,0 +1,49 @@
+{
+    "DialogueLines": [
+        {
+            "speaker": "The Solar Punk",
+            "message": "Hah, c'mon old timer",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "The Solar Punk",
+            "message": "You got a real challenge for me? Cuz I'm getting pretty sleepy right now.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "???",
+            "message": "Well, there's-",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "The Solar Punk",
+            "message": "YAAAAAAAAAWN!",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "???",
+            "message": "You know what? I'm not even gonna say anything.",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "???",
+            "message": "I'm just gonna let this next part happen.",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "The Solar Punk",
+            "message": "Huh?",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "???",
+            "message": "Watch out for the mines. And that big thing behind you.",
+            "speakerimage": "n/a"
+        },
+	{
+            "speaker": "The Solar Punk",
+            "message": "What are you-OH GOD!",
+            "speakerimage": "n/a"
+        }
+    ]
+}
