@@ -3,20 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ChangeArea : MonoBehaviour
+public class ChangeAreaNormal : MonoBehaviour
 {
     public int levelIndex;
 
-    public GameObject Player;
+    private PlayerController playerScript;
 
     public Animator transitionAnim;
-
-    private PlayerController playerScript;
     // Start is called before the first frame update
-    void Start()
-    {
-        playerScript = Player.GetComponent<PlayerController>();
-    }
 
     // Update is called once per frame
     void Update()
@@ -27,7 +21,7 @@ public class ChangeArea : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.tag);
-        if(other.gameObject.tag == "Player" && playerScript.checkItem())
+        if(other.gameObject.tag == "Player")
         {
             StartCoroutine(LoadScene());
         }
@@ -39,5 +33,4 @@ public class ChangeArea : MonoBehaviour
         yield return new WaitForSeconds(2.1f);
         SceneManager.LoadScene(levelIndex);
     }
-   
 }
