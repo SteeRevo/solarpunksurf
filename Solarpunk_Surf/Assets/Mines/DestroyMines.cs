@@ -6,6 +6,8 @@ public class DestroyMines : MonoBehaviour
 {
     private bool collideWPlayer = false;
 
+    private int damage = 1;
+
     // the player has to set off the mines
     // the player has to within range of a mine to trigger the mine
     // once a mine is triggered, if there are any other mines in range they will be triggered
@@ -13,7 +15,15 @@ public class DestroyMines : MonoBehaviour
 
     void OnTriggerEnter(Collider col) {
         if (col.CompareTag("Player")) {
-            collideWPlayer = true;
+            //Debug.Log("collision!");
+             Debug.Log("player!");
+            //Debug.Log(damage);
+            if(col.gameObject.GetComponent<PlayerState>().isInvincible == false)
+            {
+                col.gameObject.GetComponent<PlayerState>().Health -= damage;
+                Destroy(gameObject);
+                col.gameObject.GetComponent<PlayerState>().InvinEnabled();
+            }
         }
         if (col.CompareTag("Mines")) {
             Debug.Log("yay");

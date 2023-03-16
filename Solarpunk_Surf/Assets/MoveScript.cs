@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MoveScript : MonoBehaviour
 {
 
-    private Vector3 moveDirection = Vector3.forward;
+    private Vector3 moveDirection = Vector3.back;
     public float maxSpeed = 20f;
     private float moveSpeed = 0f;
     private bool initRotate = false;
@@ -19,7 +19,7 @@ public class MoveScript : MonoBehaviour
         Quaternion rot = Quaternion.Euler(rotationVec);
         moveSpeed += 0.5f;
         moveSpeed = Mathf.Min(moveSpeed, maxSpeed);
-        transform.position -= moveDirection * Time.deltaTime * moveSpeed;       
+        transform.position += (moveDirection * Time.deltaTime * moveSpeed);        
         if(initRotate)
         {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, 40f * Time.deltaTime);
@@ -35,13 +35,17 @@ public class MoveScript : MonoBehaviour
         }   
         if(other.gameObject.tag == "RotateTrigger")
         {
+
             Debug.Log(other.gameObject.GetComponent<RotateTrigger>().getTurnDir());
             if(other.gameObject.GetComponent<RotateTrigger>().getTurnDir() == turnDir.right){
-                RotateRight();
+                Debug.Log("Right");    
+                GoRight();
             }
             if(other.gameObject.GetComponent<RotateTrigger>().getTurnDir() == turnDir.left){
-                RotateLeft();
+                Debug.Log("Left");    
+                GoLeft();
             }
+          
         }
         if(other.gameObject.tag == "Destructable")
         {
@@ -51,17 +55,17 @@ public class MoveScript : MonoBehaviour
     }
 
 
-    private void RotateLeft()
+    private void GoLeft()
     {
         initRotate = true;
-        moveDirection = moveDirection + new Vector3 (-1, 0, -1);
-        rotationVec = rotationVec + new Vector3(0, -90, 0);
+        moveDirection = transform.TransformDirection(Vector3.left);
+        rotationVec = rotationVec + new Vector3(0, 90, 0);
     }
 
-    private void RotateRight()
+    private void GoRight()
     {
         initRotate = true;
-        moveDirection = moveDirection + new Vector3 (1, 0, 1);
-        rotationVec = rotationVec + new Vector3(0, 90, 0);
+        moveDirection = transform.TransformDirection(Vector3.right);
+        rotationVec = rotationVec + new Vector3(0, -90, 0);
     }
 }
