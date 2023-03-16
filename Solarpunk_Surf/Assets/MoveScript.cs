@@ -10,13 +10,13 @@ public class MoveScript : MonoBehaviour
     public float maxSpeed = 20f;
     private float moveSpeed = 0f;
     private bool initRotate = false;
-    
+    private Vector3 rotationVec = new Vector3 (0, 0, 0);
     
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        var rot = Quaternion.Euler(0, -90, 0);
+        Quaternion rot = Quaternion.Euler(rotationVec);
         moveSpeed += 0.5f;
         moveSpeed = Mathf.Min(moveSpeed, maxSpeed);
         transform.position -= moveDirection * Time.deltaTime * moveSpeed;       
@@ -35,8 +35,13 @@ public class MoveScript : MonoBehaviour
         }   
         if(other.gameObject.tag == "RotateTrigger")
         {
-            Debug.Log("Rotate trigger");
-            RotateMon();
+            Debug.Log(other.gameObject.GetComponent<RotateTrigger>().getTurnDir());
+            if(other.gameObject.GetComponent<RotateTrigger>().getTurnDir() == turnDir.right){
+                RotateRight();
+            }
+            if(other.gameObject.GetComponent<RotateTrigger>().getTurnDir() == turnDir.left){
+                RotateLeft();
+            }
         }
         if(other.gameObject.tag == "Destructable")
         {
@@ -46,9 +51,17 @@ public class MoveScript : MonoBehaviour
     }
 
 
-    private void RotateMon()
+    private void RotateLeft()
     {
         initRotate = true;
-        moveDirection = Vector3.left;
+        moveDirection = moveDirection + new Vector3 (-1, 0, -1);
+        rotationVec = rotationVec + new Vector3(0, -90, 0);
+    }
+
+    private void RotateRight()
+    {
+        initRotate = true;
+        moveDirection = moveDirection + new Vector3 (1, 0, 1);
+        rotationVec = rotationVec + new Vector3(0, 90, 0);
     }
 }
