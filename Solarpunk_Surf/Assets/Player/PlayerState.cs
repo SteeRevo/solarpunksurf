@@ -13,7 +13,11 @@ public class PlayerState : MonoBehaviour
     [SerializeField]
     private Slider healthMeter;
 
+    [SerializeField]
+    private GameObject gameOverScreen;
+
     public bool isInvincible = false;
+    public bool gameOver = false;
     public float invinCoolddown = 3.0f;
 
     private int health;
@@ -29,7 +33,7 @@ public class PlayerState : MonoBehaviour
             healthMeter.value = Mathf.InverseLerp(0, maxHealth, health) * 100;
             if (health <= 0)
             {
-                Debug.Log("game over");
+                GameOver();
             }
         }
     }
@@ -57,6 +61,15 @@ public class PlayerState : MonoBehaviour
     {
         Health = maxHealth;
         origColor = meshRender.material.color;
+    }
+
+    void GameOver()
+    {
+        gameOver = true;
+        gameOverScreen.SetActive(true);
+        Time.timeScale = 0f;
+        GetComponent<PlayerController>().enabled = false;
+        // how to enable menu controls?
     }
 
     // Update is called once per frame

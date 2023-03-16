@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Menu_Controls : MonoBehaviour
 {
@@ -8,9 +9,8 @@ public class Menu_Controls : MonoBehaviour
 
     [SerializeField]
     private GameObject pauseMenuUI;
-
+    private PlayerState playerState;
     public static bool gameIsPaused = false;
-
     public delegate void PauseController();
     public static event PauseController OnPause;
 
@@ -20,15 +20,21 @@ public class Menu_Controls : MonoBehaviour
     void Awake()
     {
         playerActions = new InputManager();
+        playerState = GetComponent<PlayerState>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if(playerActions.UI.Pause.triggered){
-            Debug.Log("Pause");
-            PauseGame();
-            
+            if(playerState.gameOver)
+            {
+                Restart();
+            } else
+            {
+                Debug.Log("Pause");
+                PauseGame();
+            }
         }
     }
 
@@ -81,6 +87,15 @@ public class Menu_Controls : MonoBehaviour
         inConvo = !inConvo;
     }
 
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void QuitToMain()
+    {
+        SceneManager.LoadScene(0);
+    }
 
     public void OnEnable()
     {
