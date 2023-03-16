@@ -1,0 +1,9 @@
+{
+    "DialogueLines": [
+        {
+            "speaker": "???",
+            "message": "Quit buzzing around me, kid.",
+            "speakerimage": "n/a"
+        }
+    ]
+}
