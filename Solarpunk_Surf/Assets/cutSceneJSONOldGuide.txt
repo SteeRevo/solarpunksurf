@@ -1,8 +1,148 @@
 {
     "DialogueLines": [
         {
-            "speaker": "???",
-            "message": "Quit buzzing around me, kid.",
+            "speaker": "Old Guide",
+            "message": "I can’t believe you made it back.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "The Solarpunk",
+            "message": "Yeah, no thanks to you. A little help with those mines or navigating the turrets would have been nice.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "Old Guide",
+            "message": "Hey, I told you already. I wanted no part of this.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "The Solarpunk",
+            "message": "Yeah, that’s the part that I still don't get, man.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "The Solarpunk",
+            "message": "We have a lot of, like, potential to rebuild with the remaining communities.  If we teamed up, I could see us—",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "Old Guide",
+            "message": "You don’t get it, do you? You have a childlike view of reality.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "Old Guide",
+            "message": "Why on earth would I ever want to go back to the world we once had?",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "Old Guide",
+            "message": "A world dominated by corporations and our apathetic mistakes.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "Old Guide",
+            "message": "Why would we want to rebuild such a system only to watch it fall once more?",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "The Solarpunk",
+            "message": "Don’t you see the state that the world is in now? I sleep on my paddleboard! We have nothing!",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "The Solarpunk",
+            "message": "The two of us have the ability to do something for the better.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "The Solarpunk",
+            "message": "Yeah, people in the past might have made some mistakes, but we can change their old ways.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "Old Guide",
+            "message": "That's precious. You think people can change?",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "Old Guide",
+            "message": "History is a flat circle. What once was will be again.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "Old Guide",
+            "message": "Our mistakes always go uncorrected.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "Old Guide",
+            "message": "Someone else will rebuild the rat race we were all once a part of, and I don’t want to be a part of it.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "The Solarpunk",
+            "message": "....",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "Old Guide",
+            "message": "Are we done? Did you find what I was looking for?",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "The Solarpunk",
+            "message": "...So there’s nothing you actually care about, is there?",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "Old Guide",
+            "message": "I'm not---",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "Old Guide",
+            "message": "I just don’t want any part of this, kid.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "Old Guide",
+            "message": "I prefer my solitude and I think everyone can appreciate the leagues of freedom we have been offered.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "The Solarpunk",
+            "message": "You can always choose to live like this!",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "The Solarpunk",
+            "message": "Just– help me fix the tower! We can contact the other communities that are scattered throughout this wasteland.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "The Solarpunk",
+            "message": "...I’ll leave you alone after this, I swear.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "Old Guide",
+            "message": "Bullshit, that's what you said last time! And then 2 days later you’re banging on my door to let you back in.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "The Solarpunk",
+            "message": "Man, I have no one else.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "The Solarpunk",
+            "message": "Just this one last thing and I’ll leave you alone forever. Help me rebuild this tower.",
+            "speakerimage": "n/a"
+        },
+        {
+            "speaker": "Old Guide",
+            "message": "...Alright, I’ll help you. I’m sick of you buzzing around me, anyways.",
             "speakerimage": "n/a"
         }
     ]
