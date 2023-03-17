@@ -8,10 +8,19 @@ public class DestroyMines : MonoBehaviour
 
     private int damage = 1;
 
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private AudioClip explodeClip;
+
     // the player has to set off the mines
     // the player has to within range of a mine to trigger the mine
     // once a mine is triggered, if there are any other mines in range they will be triggered
     // the mines explode at random times
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void OnTriggerEnter(Collider col) {
         if (col.CompareTag("Player")) {
@@ -21,8 +30,11 @@ public class DestroyMines : MonoBehaviour
             if(col.gameObject.GetComponent<PlayerState>().isInvincible == false)
             {
                 col.gameObject.GetComponent<PlayerState>().Health -= damage;
-                Destroy(gameObject);
+                audioSource.PlayOneShot(explodeClip);
+                Debug.Log(explodeClip.length);
+                Destroy(gameObject, explodeClip.length);
                 col.gameObject.GetComponent<PlayerState>().InvinEnabled();
+                
             }
         }
         if (col.CompareTag("Mines")) {
