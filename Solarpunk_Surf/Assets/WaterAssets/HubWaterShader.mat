@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Water
+  m_Name: HubWaterShader
   m_Shader: {fileID: -6465566751694194690, guid: d249d69c7b4063b43a22c515f33a1395, type: 3}
   m_ValidKeywords:
   - _ALPHATEST_ON
@@ -60,10 +60,10 @@ Material:
     - _CastShadows: 1
     - _Cull: 2
     - _DstBlend: 10
-    - _FoamAmount: 3
-    - _FoamCutoff: 0.8
+    - _FoamAmount: 2
+    - _FoamCutoff: 0.9
     - _FoamSpeed: 1
-    - _Foamscale: 100
+    - _Foamscale: 300
     - _QueueControl: 1
     - _QueueOffset: 0
     - _RefractionScale: 2
@@ -75,7 +75,7 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Deep_Water: {r: 0.2775454, g: 0.7264151, b: 0.6892358, a: 0.54509807}
-    - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Shallow_Water: {r: 0.6933962, g: 0.81449187, b: 1, a: 0.27058825}
+    - _Deep_Water: {r: 0.0064524733, g: 0.1328618, b: 0.2735849, a: 0.54509807}
+    - _FoamColor: {r: 0.8113208, g: 0.77687794, b: 0.77687794, a: 1}
+    - _Shallow_Water: {r: 0.3984514, g: 0.51754785, b: 0.6981132, a: 0.27058825}
   m_BuildTextureStacks: []
