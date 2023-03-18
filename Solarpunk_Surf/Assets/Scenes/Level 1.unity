@@ -3419,7 +3419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 875435067196480520, guid: 5bd1a0f1c51b34762b44cb285ca7dc35, type: 3}
       propertyPath: m_text
-      value: Knocked Off!
+      value: Knocked Down!
       objectReference: {fileID: 0}
     - target: {fileID: 875435067196480520, guid: 5bd1a0f1c51b34762b44cb285ca7dc35, type: 3}
       propertyPath: m_fontSize
@@ -3435,15 +3435,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 875435067196480521, guid: 5bd1a0f1c51b34762b44cb285ca7dc35, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 300.0274
+      value: 395.0515
       objectReference: {fileID: 0}
     - target: {fileID: 875435067196480521, guid: 5bd1a0f1c51b34762b44cb285ca7dc35, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 22
+      value: -0.000022888
       objectReference: {fileID: 0}
     - target: {fileID: 875435067196480521, guid: 5bd1a0f1c51b34762b44cb285ca7dc35, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 207.93
+      value: 207.09
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 875435066487750554, guid: 5bd1a0f1c51b34762b44cb285ca7dc35, type: 3}
@@ -10555,6 +10555,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Retry_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 6427968898199336199, guid: 5b9edb75d499b2d46ac281430e21fd52, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b9edb75d499b2d46ac281430e21fd52, type: 3}
 --- !u!1001 &1726642968
@@ -17231,6 +17235,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exit_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 6427968898199336199, guid: 5b9edb75d499b2d46ac281430e21fd52, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b9edb75d499b2d46ac281430e21fd52, type: 3}
 --- !u!1001 &2012972805
@@ -17880,6 +17888,10 @@ PrefabInstance:
     - target: {fileID: 2899750652165598904, guid: 3d101f70d7c696e4eb91d21e0387ef4a, type: 3}
       propertyPath: m_Name
       value: TransitionScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899750652165598904, guid: 3d101f70d7c696e4eb91d21e0387ef4a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2899750652165598905, guid: 3d101f70d7c696e4eb91d21e0387ef4a, type: 3}
       propertyPath: m_Pivot.x

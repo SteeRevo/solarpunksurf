@@ -26,15 +26,10 @@ public class Menu_Controls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerActions.UI.Pause.triggered){
-            if(playerState.gameOver)
-            {
-                Restart();
-            } else
-            {
-                Debug.Log("Pause");
-                PauseGame();
-            }
+        if(playerActions.UI.Pause.triggered && !playerState.gameOver){
+            Debug.Log("Pause");
+            PauseGame();
+            
         }
     }
 

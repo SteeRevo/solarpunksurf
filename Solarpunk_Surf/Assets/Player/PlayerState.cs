@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlayerState : MonoBehaviour
 {
@@ -61,6 +62,7 @@ public class PlayerState : MonoBehaviour
     {
         Health = maxHealth;
         origColor = meshRender.material.color;
+        Time.timeScale = 1f;
     }
 
     void GameOver()
@@ -69,7 +71,9 @@ public class PlayerState : MonoBehaviour
         gameOverScreen.SetActive(true);
         Time.timeScale = 0f;
         GetComponent<PlayerController>().enabled = false;
-        // how to enable menu controls?
+        EventSystem.current.SetSelectedGameObject(null);
+        // gets the 1th child object of the gameOverScreen which should be the retry button
+        EventSystem.current.SetSelectedGameObject(gameOverScreen.transform.GetChild(1).gameObject);
     }
 
     // Update is called once per frame
