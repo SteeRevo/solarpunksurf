@@ -24,6 +24,11 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene(_newGameLevel);
     }
 
+    public void LoadScene(string lvl)
+    {
+        SceneManager.LoadScene(lvl);
+    }
+
     public void ExitGame()
     {
         Application.Quit();
