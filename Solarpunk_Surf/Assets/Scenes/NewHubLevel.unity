@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2009,10 +2009,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: addd7f7f8273c814391811a2fee958ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelIndex: 2
+  levelIndex: 4
   Player: {fileID: 1751906101}
   transitionAnim: {fileID: 1755066328}
-  rankObject: {fileID: 0}
+  rankObject: {fileID: 2899750651755331951}
   rankText: {fileID: 0}
   timeText: {fileID: 0}
   healthText: {fileID: 0}
@@ -2088,7 +2088,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1229653609}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -60, y: -2.14, z: -72.7}
+  m_LocalPosition: {x: 8, y: -2.14, z: 123.4}
   m_LocalScale: {x: 24.493382, y: 21.466, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13552,12 +13552,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 2129686913}
     m_Modifications:
     - target: {fileID: 2899750652165598904, guid: 3d101f70d7c696e4eb91d21e0387ef4a, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899750652165598904, guid: 3d101f70d7c696e4eb91d21e0387ef4a, type: 3}
       propertyPath: m_Name
       value: TransitionScreen
       objectReference: {fileID: 0}
     - target: {fileID: 2899750652165598904, guid: 3d101f70d7c696e4eb91d21e0387ef4a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2899750652165598905, guid: 3d101f70d7c696e4eb91d21e0387ef4a, type: 3}
       propertyPath: m_Pivot.x
@@ -13605,7 +13609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2899750652165598905, guid: 3d101f70d7c696e4eb91d21e0387ef4a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 342
       objectReference: {fileID: 0}
     - target: {fileID: 2899750652165598905, guid: 3d101f70d7c696e4eb91d21e0387ef4a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13625,7 +13629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2899750652165598905, guid: 3d101f70d7c696e4eb91d21e0387ef4a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 56
+      value: -633
       objectReference: {fileID: 0}
     - target: {fileID: 2899750652165598905, guid: 3d101f70d7c696e4eb91d21e0387ef4a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -13645,6 +13649,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d101f70d7c696e4eb91d21e0387ef4a, type: 3}
+--- !u!1 &2899750651755331951 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1651900013, guid: 3d101f70d7c696e4eb91d21e0387ef4a, type: 3}
+  m_PrefabInstance: {fileID: 2899750651755331950}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4859573580815030320
 GameObject:
   m_ObjectHideFlags: 0
